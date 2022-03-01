@@ -1,4 +1,4 @@
-// YOUR NAME HERE
+// Gabriel Levshin 
 
 // === constants ===
 const MAX_QTY = 9;
@@ -15,43 +15,57 @@ const elements = {
 };
 
 // Map of id-to-quantity
+// Map associant les id des produits aux quantités
 const orders = new Map();
 
+//fonction de mapage du catalogue
 function loadCatalog(curCatalog) {
     let index = 0;
     return curCatalog.map(item => ({ ...item, id: index++ }));
 }
 
+//chargement du catalogue
 const itemCatalog = loadCatalog(catalog);
 
 window.onload = () => {
+    //catalogue par défaut (ici tous les produits du catalogue)
     renderMainCatalog(undefined);
 
+
+    //fonction de recherche 
     elements.filter.onkeyup = () => {
         const searchString = elements.filter.value;
         if (searchString.length > 0) {
+            //affichage des produits recherchés (si trouvés)
             renderMainCatalog(searchString);
         } else {
+            //affichage de tous les produits par défaut
             renderMainCatalog(undefined);
         }
     }
 }
 
+//fonction de rajout d'elements dans le panier
 function addItemToOrder(item, quantity) {
     if (orders.has(item.id)) {
+        //on rajoute le produit à orders sous forme [id,qte]
         orders.set(item.id, clamp(orders.get(item.id) + quantity, 1, MAX_QTY));
     } else {
         orders.set(item.id, clamp(quantity, 1, MAX_QTY));
     }
 
+    //mise a jour du panier
     renderOrderEntries();
 }
 
+//suppresion d'un element du panier
 function deleteItemFromOrder(item) {
     orders.delete(item.id);
+    //mise a jour du panier
     renderOrderEntries();
 }
 
+//calcul du total de la commande du panier
 function calculateTotal() {
     return Array.from(orders.entries())
         .map(([id, quantity]) => [itemCatalog.find(item => item.id === id), quantity])
@@ -60,26 +74,30 @@ function calculateTotal() {
         .reduce((acc, [price, quantity]) => acc + price * quantity, 0);
 }
 
+//function used to render/update total amount of the shoping cart
 function renderTotal() {
     const total = calculateTotal();
     elements.total.innerText = total;
 }
 
-
+//rendering products of the front page of the shop
 function renderMainCatalog(filterString) {
     const curCatalog = filterString === undefined
         ? itemCatalog
         : itemCatalog.filter(item => item.name.toLowerCase().search(filterString.toLowerCase()) !== -1 );
     // create all elements before re-rendering
+    //création de tous les élements avant le re-rendering
     const renderedElements = curCatalog.map(item => createCatalogItem(item));
-    // fast and hacky way to clear all HTML
+    // moyen rapide de réinitialiser le code HTML
     elements.shop.innerHTML = "";
     // append them all at once, should run in one update frame
+    //on append tous les elements au shop
     for (const element of renderedElements) {
         elements.shop.appendChild(element);
     }
 }
 
+//creation d'un produit de la boutique
 function createCatalogItem(item) {
 	const elContainer = document.createElement("div");
 	elContainer.className = "produit";
@@ -125,15 +143,17 @@ function createOrderControlBlock(item) {
 
     function updateOpacity() {
         const quantity = Number(elInput.value);
+        //opacite egale a 1 si qte positive sinon 0.25
         elButton.style.opacity = quantity > 0 ? 1 : 0.25;
     }
 
+    //controle de l'input qte d'un produit
     elInput.onchange = () => {
         const quantity = clamp(Number(elInput.value), 0, MAX_QTY);
         elInput.value = quantity.toString();
         updateOpacity();
     }
-
+    //update du bouton ajout au panier
     elButton.onclick = () => {
         const quantity = Number(elInput.value);
         if (quantity > 0) {
@@ -146,6 +166,7 @@ function createOrderControlBlock(item) {
 	return elDiv;
 }
 
+//ajout des images pour un produit
 function createCatalogItemFigure(item) {
     const elFigure = document.createElement("figure");
     const elImg = document.createElement("img");
@@ -162,14 +183,19 @@ function renderOrderEntries() {
         .filter(([item, _quantity]) => item !== undefined)
         .map(([item, quantity]) => createOrderEntry(item, quantity));
 
+    //quick html initialization
     elements.orders.innerHTML = "";
+
+    //appending rendered elements to page
     for (const element of renderedElements) {
         elements.orders.appendChild(element);
     }
 
+
     renderTotal();
 }
 
+//creation element dans le panier
 function createOrderEntry(item, quantity) {
     const elContainer = document.createElement("div");
     elContainer.className = "achat";
@@ -198,6 +224,7 @@ function createOrderEntry(item, quantity) {
     elDeleteButton.className = "retirer";
     elControl.appendChild(elDeleteButton);
 
+    //suppresion d'un element du panier
     elDeleteButton.onclick = () => {
         deleteItemFromOrder(item);
     }
@@ -207,6 +234,8 @@ function createOrderEntry(item, quantity) {
     return elContainer;
 }
 
+
+//fonction qui permet de vérifier que la quantité saisie est comprise dans [min, max]
 function clamp(number, min, max) {
     return Math.max(min, Math.min(number, max));
 }
