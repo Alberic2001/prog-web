@@ -15,13 +15,12 @@ const elements = {
 };
 
 // Map of id-to-quantity
-// Map associant les id des produits aux quantités
 const orders = new Map();
 
 //fonction de mapage du catalogue
 function loadCatalog(curCatalog) {
     let index = 0;
-    return curCatalog.map(item => ({ ...item, id: index++ }));
+    return curCatalog.map(item => ({ ...item, price: Number(item.price), id: index++ }));
 }
 
 //chargement du catalogue
@@ -45,14 +44,27 @@ window.onload = () => {
     }
 }
 
+function clearOrderGarbage() {
+    // collecting ids into an array before deleting
+    // since mutating a datastructure whilst iterating through it is bad
+    const idsToDelete = Array.from(orders.entries())
+        .filter(([_id, quantity]) => quantity <= 0)
+        .map(([id, _quantity]) => id);
+    for (const id of idsToDelete) {
+        orders.delete(id);
+    }
+}
+
 //fonction de rajout d'elements dans le panier
 function addItemToOrder(item, quantity) {
     if (orders.has(item.id)) {
         //on rajoute le produit à orders sous forme [id,qte]
-        orders.set(item.id, clamp(orders.get(item.id) + quantity, 1, MAX_QTY));
+        orders.set(item.id, clampItemQuantity(orders.get(item.id) + quantity));
     } else {
-        orders.set(item.id, clamp(quantity, 1, MAX_QTY));
+        orders.set(item.id, clampItemQuantity(quantity));
     }
+
+    clearOrderGarbage();
 
     //mise a jour du panier
     renderOrderEntries();
@@ -65,13 +77,18 @@ function deleteItemFromOrder(item) {
     renderOrderEntries();
 }
 
+function updateItemQuantityInOrder(item, quantity) {
+    orders.set(item.id, clampItemQuantity(quantity));
+    clearOrderGarbage();
+    renderOrderEntries();
+}
+
 //calcul du total de la commande du panier
 function calculateTotal() {
     return Array.from(orders.entries())
         .map(([id, quantity]) => [itemCatalog.find(item => item.id === id), quantity])
         .filter(([item, _quantity]) => item !== undefined)
-        .map(([item, quantity]) => [Number(item.price), quantity])
-        .reduce((acc, [price, quantity]) => acc + price * quantity, 0);
+        .reduce((acc, [item, quantity]) => acc + item.price * clampItemQuantity(quantity), 0);
 }
 
 //function used to render/update total amount of the shoping cart
@@ -149,7 +166,7 @@ function createOrderControlBlock(item) {
 
     //controle de l'input qte d'un produit
     elInput.onchange = () => {
-        const quantity = clamp(Number(elInput.value), 0, MAX_QTY);
+        const quantity = clampItemQuantity(Number(elInput.value));
         elInput.value = quantity.toString();
         updateOpacity();
     }
@@ -207,10 +224,28 @@ function createOrderEntry(item, quantity) {
     elTitle.innerText = item.name;
     elContainer.appendChild(elTitle);
 
-    const elQuantity = document.createElement("div");
+    const elQuantity = document.createElement("input");
+    elQuantity.type = "number";
+	elQuantity.step = "1";
+	elQuantity.value = "0";
+	elQuantity.min = "0";
     elQuantity.className = "quantite";
-    elQuantity.innerText = quantity.toString();
+    elQuantity.value = quantity.toString();
     elContainer.appendChild(elQuantity);
+    
+    elQuantity.onchange = () => {
+        const newQuantity = clampItemQuantity(Number(elQuantity.value));
+        if (newQuantity > 0) {
+            updateItemQuantityInOrder(item, newQuantity);
+        } else {
+            deleteItemFromOrder(item);
+        }
+    }
+
+    const elSpan = document.createElement("span");
+    elSpan.innerText = "x";
+    elSpan.setAttribute( 'class', 'span-x' );
+    elContainer.appendChild(elSpan);
 
     const elPrice = document.createElement("div");
     elPrice.className = "prix";
@@ -238,4 +273,8 @@ function createOrderEntry(item, quantity) {
 //fonction qui permet de vérifier que la quantité saisie est comprise dans [min, max]
 function clamp(number, min, max) {
     return Math.max(min, Math.min(number, max));
+}
+
+function clampItemQuantity(quantity) {
+    return clamp(Math.trunc(quantity), 0, MAX_QTY);
 }

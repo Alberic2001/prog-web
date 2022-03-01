@@ -1,5 +1,6 @@
 body {
 	background-color : #DDDDDD;
+	
 	width : 100%;
 	font-family : sans-serif;
 	padding-left : 20px;
@@ -7,8 +8,8 @@ body {
 
 
 h1 {
-	background-color: white;
-	color : rgb(60,60,60);
+	background-color: grey;
+	color : white;
 	padding : 5px;
 	border-radius : 4px;
 	width : 805px;
@@ -24,6 +25,12 @@ div#panier, div#boutique {
 
 div#boutique {
 		width : 566px;	
+}
+
+.span-x{
+
+	padding-right:8px;
+	font-size: small;
 }
 
 
@@ -45,7 +52,7 @@ div.achats {
 }
 
 div#panier { 
-	width : 235px;
+	width :320px;
 	text-align : center;
 }
 
@@ -116,7 +123,8 @@ div.produit div.prix {
 	border-radius : 4px;
 }
 div.prix:after, #montant:after {
-	content : " €"
+	content : " €";
+	margin-right:10px;
 }
 
 
