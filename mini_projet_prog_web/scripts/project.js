@@ -1,10 +1,113 @@
 // Gabriel Levshin 
 
+
+// === helper classes ===
+class Catalog {
+
+    constructor(data) {
+        let index = 0;
+        this.db = new Map(data.map(item => ({ ...item, id: index++ })).map(item => [item.id, item]));
+    }
+
+    getItemById(id) {
+        return this.db.get(id);
+    }
+
+    getItemsByIds(ids) {
+        return ids.map(id => this.getItemById(id)).filter(item => item !== undefined);
+    }
+
+    getAllItems() {
+        return Array.from(this.db.values());
+    }
+
+    getAllIds() {
+        return Array.from(this.db.keys());
+    }
+
+}
+
+class Cart {
+
+    constructor(data, clampFunc, onUpdateFunc) {
+        console.log("constructing cart with data", data);
+        // clampFunc can be undefined, in which case it does nothing
+        this.clampFunc = clampFunc ?? (item => item);
+        this.onUpdateFunc = onUpdateFunc;
+        this.data = data !== undefined
+            ? new Map(data)
+            : new Map();
+    }
+
+    static loadFromStorage(storageName, clampFunc, onUpdateFunc) {
+        const serialized = window.localStorage.getItem(storageName);
+        let deserialized = undefined;
+        try {
+            if (serialized !== undefined) {
+                deserialized = JSON.parse(serialized);
+            }
+        } catch (error) {
+            console.log("error deserializing cart!");
+            console.log(error);
+        } finally {
+            return new Cart(deserialized, clampFunc, onUpdateFunc);
+        }
+    }
+
+    saveToStorage(storageName) {
+        const serialized = JSON.stringify(Array.from(this.data.entries()));
+        window.localStorage.setItem(storageName, serialized);
+    }
+
+    addItem(id, quantity) {
+        if (this.data.has(id)) {
+            this.data.set(id, this.clampFunc(this.data.get(id) + quantity));
+        } else {
+            this.setItemQuantity(id, quantity);
+        }
+        this.clearGarbage();
+        this.forceUpdate();
+    }
+
+    setItemQuantity(id, quantity) {
+        this.data.set(id, this.clampFunc(quantity));
+        this.clearGarbage();
+        this.forceUpdate();
+        return this.data.get(id) ?? 0;
+    }
+
+    removeItem(id) {
+        this.data.delete(id);
+        this.forceUpdate();
+    }
+
+    getQuantities() {
+        return Array.from(this.data.entries());
+    }
+
+    clearGarbage() {
+        const idsToDelete = this.getQuantities()
+            .filter(([_id, quantity]) => quantity <= 0)
+            .map(([id, _quantity]) => id);
+        for (const id of idsToDelete) {
+            this.removeItem(id);
+        }
+    }
+
+    forceUpdate() {
+        this.onUpdateFunc?.();
+    }
+
+}
+
+
 // === constants ===
 const MAX_QTY = 9;
 const productIdKey = "product";
 const orderIdKey = "order";
 const inputIdKey = "qte";
+
+const CART_STORAGE_NAME = "cart";
 
 // === elements  ===
 const elements = {
@@ -12,24 +115,21 @@ const elements = {
     filter: document.getElementById("filter"),
     total:  document.getElementById("montant"),
     orders: document.getElementsByClassName("achats")[0],
+    save:   document.getElementById("save-button"),
 };
 
 // Map of id-to-quantity
 const orders = new Map();
 
-//fonction de mapage du catalogue
-function loadCatalog(curCatalog) {
-    let index = 0;
-    return curCatalog.map(item => ({ ...item, price: Number(item.price), id: index++ }));
-}
-
-//chargement du catalogue
-const itemCatalog = loadCatalog(catalog);
+const store = {
+    items: new Catalog(catalog.map(item => ({ ...item, price: Number(item.price) }))),
+    cart: Cart.loadFromStorage(CART_STORAGE_NAME, clampItemQuantity, renderOrderEntries),
+};
 
 window.onload = () => {
     //catalogue par défaut (ici tous les produits du catalogue)
     renderMainCatalog(undefined);
-
+    store.cart.forceUpdate();
 
     //fonction de recherche 
     elements.filter.onkeyup = () => {
@@ -42,51 +142,16 @@ window.onload = () => {
             renderMainCatalog(undefined);
         }
     }
-}
 
-function clearOrderGarbage() {
-    // collecting ids into an array before deleting
-    // since mutating a datastructure whilst iterating through it is bad
-    const idsToDelete = Array.from(orders.entries())
-        .filter(([_id, quantity]) => quantity <= 0)
-        .map(([id, _quantity]) => id);
-    for (const id of idsToDelete) {
-        orders.delete(id);
+    elements.save.onclick = () => {
+        store.cart.saveToStorage(CART_STORAGE_NAME);
     }
-}
-
-//fonction de rajout d'elements dans le panier
-function addItemToOrder(item, quantity) {
-    if (orders.has(item.id)) {
-        //on rajoute le produit à orders sous forme [id,qte]
-        orders.set(item.id, clampItemQuantity(orders.get(item.id) + quantity));
-    } else {
-        orders.set(item.id, clampItemQuantity(quantity));
-    }
-
-    clearOrderGarbage();
-
-    //mise a jour du panier
-    renderOrderEntries();
-}
-
-//suppresion d'un element du panier
-function deleteItemFromOrder(item) {
-    orders.delete(item.id);
-    //mise a jour du panier
-    renderOrderEntries();
-}
-
-function updateItemQuantityInOrder(item, quantity) {
-    orders.set(item.id, clampItemQuantity(quantity));
-    clearOrderGarbage();
-    renderOrderEntries();
 }
 
 //calcul du total de la commande du panier
 function calculateTotal() {
-    return Array.from(orders.entries())
-        .map(([id, quantity]) => [itemCatalog.find(item => item.id === id), quantity])
+    return store.cart.getQuantities()
+        .map(([id, quantity]) => [store.items.getItemById(id), quantity])
         .filter(([item, _quantity]) => item !== undefined)
         .reduce((acc, [item, quantity]) => acc + item.price * clampItemQuantity(quantity), 0);
 }
@@ -99,12 +164,12 @@ function renderTotal() {
 
 //rendering products of the front page of the shop
 function renderMainCatalog(filterString) {
-    const curCatalog = filterString === undefined
-        ? itemCatalog
-        : itemCatalog.filter(item => item.name.toLowerCase().search(filterString.toLowerCase()) !== -1 );
+    const itemsToRender = filterString === undefined
+        ? store.items.getAllItems()
+        : store.items.getAllItems().filter(item => item.name.toLowerCase().search(filterString.toLowerCase()) !== -1);
     // create all elements before re-rendering
     //création de tous les élements avant le re-rendering
-    const renderedElements = curCatalog.map(item => createCatalogItem(item));
+    const renderedElements = itemsToRender.map(item => createCatalogItem(item));
     // moyen rapide de réinitialiser le code HTML
     elements.shop.innerHTML = "";
     // append them all at once, should run in one update frame
@@ -174,7 +239,7 @@ function createOrderControlBlock(item) {
     elButton.onclick = () => {
         const quantity = Number(elInput.value);
         if (quantity > 0) {
-            addItemToOrder(item, quantity);
+            store.cart.addItem(item.id, quantity);
             elInput.value = "0";
         }
         updateOpacity();
@@ -195,8 +260,8 @@ function createCatalogItemFigure(item) {
 
 function renderOrderEntries() {
     // same principles as renderMainCatalog
-    const renderedElements = Array.from(orders.entries())
-        .map(([id, quantity]) => [itemCatalog.find(item => item.id === id), quantity])
+    const renderedElements = store.cart.getQuantities()
+        .map(([id, quantity]) => [store.items.getItemById(id), quantity])
         .filter(([item, _quantity]) => item !== undefined)
         .map(([item, quantity]) => createOrderEntry(item, quantity));
 
@@ -234,12 +299,7 @@ function createOrderEntry(item, quantity) {
     elContainer.appendChild(elQuantity);
     
     elQuantity.onchange = () => {
-        const newQuantity = clampItemQuantity(Number(elQuantity.value));
-        if (newQuantity > 0) {
-            updateItemQuantityInOrder(item, newQuantity);
-        } else {
-            deleteItemFromOrder(item);
-        }
+        const updatedQuantity = store.cart.setItemQuantity(item.id, Number(elQuantity.value));
     }
 
     const elSpan = document.createElement("span");
@@ -261,7 +321,7 @@ function createOrderEntry(item, quantity) {
 
     //suppresion d'un element du panier
     elDeleteButton.onclick = () => {
-        deleteItemFromOrder(item);
+        store.cart.removeItem(item.id);
     }
 
     elContainer.appendChild(elControl);

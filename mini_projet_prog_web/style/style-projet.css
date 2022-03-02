@@ -23,6 +23,15 @@ div#panier, div#boutique {
 	height : 550px;
 }
 
+#save-button{
+
+	background-color: white;
+	font-size: small;
+	margin-bottom: 10px;
+	
+	position:absolute;
+}
+
 div#boutique {
 		width : 566px;	
 }
