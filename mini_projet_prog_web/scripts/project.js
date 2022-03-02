@@ -1,4 +1,4 @@
-// Gabriel Levshin 
+// Gabriel Levshin - Phuong-Nam Vu - Albéric Ziangbe
 
 
 // === helper classes ===
