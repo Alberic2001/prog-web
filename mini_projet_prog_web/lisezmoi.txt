@@ -1,8 +1,12 @@
 Gabriel Levshin - Phuong-Nam Vu - Albéric Ziangbe
 
 
-Questions 1 à 4: implémentées
-Difficultés rencontrées : recherche de substring 
+Question 1 à 3 : implémentées
+Pas de difficultés particulières
+
+Question 4: implémentée
+Difficultés rencontrées : recherche de substring et sensibilité à la casse
+Résolu avec filter et toLowerCase de la clé de recherche comparé au noms des produits du catalogue
 
 Question 5 : implémentée
 Pas de difficultés particulières
