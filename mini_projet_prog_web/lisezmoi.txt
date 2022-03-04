@@ -1,24 +1,28 @@
 Gabriel Levshin - Phuong-Nam Vu - Albéric Ziangbe
 
 
-Questions 1 à 4: implémentées
-Difficultés rencontrées : recherche de substring 
+Question 1 à 3 : implémentées
+Pas de difficultés particulières
+
+Question 4: implémentée
+Difficultés rencontrées : recherche de substring et sensibilité à la casse
+Résolu avec filter et toLowerCase de la clé de recherche comparé au noms des produits du catalogue
 
 Question 5 : implémentée
 Pas de difficultés particulières
 
 Question 6 : implémentée
  ajout de quantité de produits supérieure à MAX_QTE
-Cette exception a pu être gérée pour ne plus afficher un total en NaN, la logique des fonctions a été retravaillée
+Cette exception a pu être gérée pour ne plus afficher un total en NaN, la logique des fonctions du calcul des montants a été retravaillée
 
 Question 7 : implémentée
-Difficultés rencontrées : mise à jour du montant après suppresion des éléments
-Ce problème a pu être résolu avec un re-rendering du montant et de son html
+Difficultés rencontrées : mise à jour du montant après suppression des éléments
+Ce problème a pu être résolu avec un re-rendering du montant et de son html avec un recalcul du total
 Il y avait aussi un décalage du bouton corbeille dans le panier quand il y avait plusieurs éléments, cela a pu être résolu avec le css
 
 
-Fonctionnalités fonctionnelles implémentées:
+Fonctionnalités optionnelles implémentées:
 
-- Changement de la quantité des produits dans le panier avec mise à jour du montant total
+- Changement de la quantité des produits directement dans le panier avec mise à jour du montant total
 
-- Implémentation d'un bouton de sauvegarde du panier pour stocker en local le panier tel qu'il a été laissé par l'utilisateur
+- Implémentation d'un bouton de sauvegarde du panier (avec localStorage) pour stocker en local le panier tel qu'il a été laissé par l'utilisateur
