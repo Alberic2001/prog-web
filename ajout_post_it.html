@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/ajout_post_it.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script type="text/javascript">
+
+
+    let create_btn= document.getElementById("create_btn");
+    let cancel_btn= document.getElementById("cancelbtn");
+    let textarea= document.getElementById("contenu");
+
+    cancel_btn.onclick= function (){
+        
+        
+        window.location.replace="accueil.html";
+    }
+        
+    
+
+
+    function checkContent() {
+
+        if (document.getElementById("contenu").value !=""){
+
+
+            create_btn.disabled=false;
+
+        } 
+      
+    }
+    window.onload = function () {
+      checkContent();
+    }
+
+
+    
+  </script>
+</head>
+
+
+
+<body>
+
+  <script type="text/javascript" src="scripts/validate.js"></script>
+
+
+    <form action="signup.php" method="post" style="border:1px solid #ccc">
+        <div class="container">
+      
+          <h1>Ajout de post-it </h1>
+          <hr>
+      <div>
+        <label for="titre"><b>Titre du post it</b></label>
+    </br>
+        <input type="text" placeholder="Titre" minlength="5" maxlength="150" name="titre" required>
+
+      </div>
+      </br>
+          
+    <div>
+        
+ 
+
+    <label for="contenu">Contenu:</label>
+        </br>
+
+    <textarea id="contenu" name="contenu"
+          rows="5" cols="33">
+    </textarea>
+
+
+
+
+
+    </div>
+          
+    </br>
+    <div>
+
+        <label for="partage">Liste de partage:</label>
+        </br>
+
+    <select name="partage" id="partage">
+    <option value="">-- Choisir les utilisateurs --</option>
+    <option value="dog">user1</option>
+    <option value="cat">user2</option>
+
+    </select>
+
+    </div>
+
+
+    <div class="clearfix">
+        <a href="accueil.html"><button type="submit" id="create_btn" disabled=true>Créer le post-it</button></a>
+        <button type="button" class="cancelbtn">Annuler</button>
+        
+      </div>
+          
+      
+          </div>
+      
+          
+        
+      </form> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+  
+
+
+
+
+
+
+
+
+
+
+</html>
