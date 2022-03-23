@@ -1,25 +1,24 @@
 <?php
 
 include_once('../manager/PostitManager.php');
-include_once('../models/Postit.php');
-
-
-
-$db = new PostitManager();
-
-$postit = new Postit('And another title', 'Yes we go on and on !', new DateTime(), 3);
-echo '<br />';
-print_r($db->create($postit));
+// include_once('../manager/SharedManager.php');
+// include_once('../manager/UserManager.php');
+$date = new DateTime();
+$postit = postit_builder('First title', 'kadasdv agsesv asgdasveaf', $date->format('Y-m-d H:i:s'), 1);
+$log = create($postit);
 echo '<br />';
 
-print_r($db->read_all());
+$postit_array = read_all();
+print_r($postit_array);
 echo '<br />';
 
-print_r($db->read_one($postit->getId()));
+$postit2 = read_one(3);
+print_r($postit2);
 echo '<br />';
-$postit->setContent('I dont know how to give name to things !!!')
-       ->setTitle($postit->getTitle() . ' !!!');
-print_r($db->update($postit));
+
+
+$postit['content'] = 'I dont know how to give name to things !!!';
+print_r(update($postit));
 echo '<br />';
 
 print_r($postit);
