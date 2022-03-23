@@ -5,18 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" type="text/css" href="./connexion.css">
+    <link rel="stylesheet" type="text/css" href="./css/connexion.css">
     <script type="text/javascript" src="./connexion.js"></script>
 </head>
 <body>
-    <h1>Connexion</h1>
-    <form  method="post">
+    
+    <form  class="connx" method="post">
+        <h1>Connexion</h1>
         <ul>
-            <li>User Name <input type="text" id="mail" pattern=".*@.*\..*"/>  <p id="name_indicator"> </p></li>
-            <li>Mot de pass <input type="text" id="pwd"/> <p id="pwd_indicator"> </p></li>
+            <li>User Name <input type="text" id="mail" name="mail"/> 
+            <span id="code_msg"> </span>
+        </li>
+            <li>Mot de pass 
+                <input type="password" id="pwd" name="pwd"/>
+                <span id="pwd_msg"></span>
+            </li>
             <li><a href="./inscription.html">Inscrivez-vous!</a></li>
         </ul>
-        <input type="submit" id="login" value="Log in" >
+        <input type="submit" id="login" value="Log in" onclick="check()">
     </form>
 </body>
 </html>
