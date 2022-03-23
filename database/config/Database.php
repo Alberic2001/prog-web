@@ -17,5 +17,4 @@ class Database {
         echo 'Connection established :)';
         return $this->conn;
     }
-
 }

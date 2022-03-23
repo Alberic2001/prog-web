@@ -1,14 +1,14 @@
 <?php
-// include_once('../config/Database.php');
-// include_once('../config/Template.php');
-// include_once('../models/User.php');
-
+/*
+include_once('../config/Database.php');
+include_once('../config/Template.php');
+include_once('../models/User.php');
+*/
 class UserManager
 {
     private $conn;
     private $table = 'user';
     private $query;
-
     public function __construct()
     {
         $this->conn = new Database();
@@ -19,9 +19,9 @@ class UserManager
     {
         $this->query = 'INSERT INTO ' . $this->table . '(`email`, `password`, `surname`, `lastname`, `birth_date`) VALUES (?,?,?,?,?);';
         $statement = $this->conn->prepare($this->query);
-        $user->setBirth_date($user->getBirth_date()->format('Y-m-d H:i:s'));
+        $user->setBirth_date($user->getBirth_date());
         $hashed_password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
-        if ($statement->bind_param('sssss', $user->getEmail(), $hashed_password, $user->getSurname(), $user->getLastname(), $user->getBirth_date()->format('Y-m-d H:i:s'))) {
+        if ($statement->bind_param('sssss', $user->getEmail(), $hashed_password, $user->getSurname(), $user->getLastname(), $user->getBirth_date())) {
             if ($statement->execute()) {
                 $user->setId($statement->insert_id);
                 return true;

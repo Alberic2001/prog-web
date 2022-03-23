@@ -1,15 +1,14 @@
 <?php
+/*
 include_once('../config/Database.php');
 include_once('../config/Template.php');
 include_once('../models/Postit.php');
-
+*/
 class PostitManager implements Template
 {
-
     private $conn;
     private $table = 'postit';
     private $query;
-
 
     public function __construct()
     {

@@ -6,4 +6,8 @@
     if(!$conn){
         die('Could not Connect My Sql:' .mysql_error());
     }
+
+    function get_connexion() {
+        return $conn;
+    }
 ?>
