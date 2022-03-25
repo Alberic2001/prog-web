@@ -1,12 +1,12 @@
 <?php
 require_once('../config/Database.php');
 require_once('../models/helper.php');
-define('TABLE', 'shared');
+define('SHARED', 'shared');
 
 function create($shared)
 {
     $conn = connect();
-    $query = 'INSERT INTO ' . TABLE . '(`user_id`, `postit_id`) VALUES (?,?);';
+    $query = 'INSERT INTO ' . SHARED . '(`user_id`, `postit_id`) VALUES (?,?);';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('ii', $shared['user_id'], $shared['postit_id'])) {
         if ($statement->execute()) {
@@ -22,7 +22,7 @@ function create($shared)
 function read_all()
 {
     $conn = connect();
-    $query = 'SELECT * FROM ' . TABLE . ';';
+    $query = 'SELECT * FROM ' . SHARED . ';';
     $statement = $conn->prepare($query);
     if ($statement->execute()) {
         $result = $statement->get_result();
@@ -44,7 +44,7 @@ function read_all()
 function read_one($shared_id)
 {
     $conn = connect();
-    $query = 'SELECT id, user_id, postit_id FROM ' . TABLE . ' WHERE id = ?';
+    $query = 'SELECT id, user_id, postit_id FROM ' . SHARED . ' WHERE id = ?';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('i', $shared_id)) {
         if ($statement->execute()) {
@@ -67,7 +67,7 @@ function read_one($shared_id)
 function read_all_for_one_user($userId)
 {
     $conn = connect();
-    $query = 'SELECT id, user_id, postit_id FROM ' . TABLE . ' WHERE user_id = ?';
+    $query = 'SELECT id, user_id, postit_id FROM ' . SHARED . ' WHERE user_id = ?';
     $statement = $conn->prepare($query);
 
     if ($statement->bind_param('s', $userId)) {
@@ -99,7 +99,7 @@ function update($shared)
 function delete($id)
 {
     $conn = connect();
-    $query = 'DELETE FROM ' . TABLE . ' WHERE id = ?;';
+    $query = 'DELETE FROM ' . SHARED . ' WHERE id = ?;';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('i', $id)) {
         if ($statement->execute()) {

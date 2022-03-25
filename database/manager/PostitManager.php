@@ -1,12 +1,12 @@
 <?php
 require_once('../config/Database.php');
 require_once('../models/helper.php');
-define('TABLE', 'postit');
+define('POSTIT', 'postit');
 
 function create($postit)
 {
     $conn = connect();
-    $query = 'INSERT INTO ' . TABLE . '(`title`, `content`, `date`, `user_id`) VALUES (?,?,?,?);';
+    $query = 'INSERT INTO ' . POSTIT . '(`title`, `content`, `date`, `user_id`) VALUES (?,?,?,?);';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('sssi', ...[$postit['title'], $postit['content'], $postit['date'], $postit['user_id']])) {
         if ($statement->execute()) {
@@ -22,7 +22,7 @@ function create($postit)
 function read_all()
 {
     $conn = connect();
-    $query = 'SELECT * FROM ' . TABLE . ';';
+    $query = 'SELECT * FROM ' . POSTIT . ';';
     $statement = $conn->prepare($query);
     if ($statement->execute()) {
         $result = $statement->get_result();
@@ -44,7 +44,7 @@ function read_all()
 function read_one($postitId)
 {
     $conn = connect();
-    $query = 'SELECT id, title, content, date, user_id FROM ' . TABLE . ' WHERE id = ?';
+    $query = 'SELECT id, title, content, date, user_id FROM ' . POSTIT . ' WHERE id = ?';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('s', $postitId)) {
         if ($statement->execute()) {
@@ -65,7 +65,7 @@ function read_one($postitId)
 function read_all_for_one_user($userId)
 {
     $conn = connect();
-    $query = 'SELECT id, title, content, date, user_id FROM ' . TABLE . ' WHERE user_id = ?';
+    $query = 'SELECT id, title, content, date, user_id FROM ' . POSTIT . ' WHERE user_id = ?';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('s', $userId)) {
         if ($statement->execute()) {
@@ -90,7 +90,7 @@ function read_all_for_one_user($userId)
 function update($postit)
 {
     $conn = connect();
-    $query = 'UPDATE ' . TABLE . ' SET `title`=?,`content`=?,`user_id`=? WHERE id = ?;';
+    $query = 'UPDATE ' . POSTIT . ' SET `title`=?,`content`=?,`user_id`=? WHERE id = ?;';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('ssii', ...[$postit['title'], $postit['content'], $postit['user_id'], $postit['id']])) {
         if ($statement->execute()) {
@@ -106,7 +106,7 @@ function update($postit)
 function delete($postit_id)
 {
     $conn = connect();
-    $query = 'DELETE FROM ' . TABLE . ' WHERE id = ?;';
+    $query = 'DELETE FROM ' . POSTIT . ' WHERE id = ?;';
     $statement = $conn->prepare($query);
     if ($statement->bind_param('i', $postit_id)) {
         if ($statement->execute()) {
