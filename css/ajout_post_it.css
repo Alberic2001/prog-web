@@ -17,7 +17,7 @@ h2 {
     flex-wrap:wrap;
     align-items: center;
     justify-content: center;
-    min-height:85vh;
+    height:90vh;
     width: 100%;
 }
 
@@ -51,6 +51,7 @@ h2 {
     text-align:left;
     margin-top:0px;
     margin-bottom:10px;
+    float: left;
 }
 
 #date {
@@ -68,25 +69,33 @@ h2 {
     align-items: center;
 }
 
-label[for="titre"], label[for="contenu"] {
+label[for="title"], label[for="content"] {
     float: left;
     margin-left: 10%;
 }
 
-#titre, #contenu {
+#title, #content {
     margin: 10px 0px 3px 10px;
     width: 80%;
     border: solid 2px #F1E022;
 }
 
-#titre {
+#title {
     width: 80%;
     border-radius: 30px;
     padding:5px;
 }
 
+ul {
+    list-style-type: none;
+}
 
-#contenu {
+
+.infos {
+    margin : 10px 0px;
+}
+
+#content {
     min-height: 12rem;
     border-radius: 15px;
     padding:5px;
@@ -104,6 +113,18 @@ textarea::-webkit-resizer {
     display: inline-block;
     text-align: center;
     border-bottom: 4px solid #F1E022;
+}
+
+.partage > ul {
+    text-align: left;
+}
+
+.partage > ul > li {
+    margin-top: 0.2em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.9em;
 }
 
 .btn-action{

@@ -60,15 +60,21 @@ hr {
 }
 
 .error {
-    border-color: #910001 !important;
     background-color: #E05254 !important;
     color: black;
 }
 
 .message_error {
     background-color: #E46364;
-    color: #AB0001;
-    margin-top:-20px;
-    margin-bottom:15px;
+    border: solid 1px #910001 !important;
+    color: #7A2C2C !important;
+    margin-top:-22px !important;
+    margin-bottom:15px !important;
     text-align: center;
+}
+
+.success {
+    border: solid 1px #359100 !important;
+    background-color: #81e052 !important;
+    color: black;
 }

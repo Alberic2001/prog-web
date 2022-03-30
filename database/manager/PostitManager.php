@@ -1,9 +1,10 @@
 <?php
-require_once('../config/Database.php');
-require_once('../models/helper.php');
+$path = realpath(dirname(__DIR__) . '/.');
+require_once($path.'/config/Database.php');
+require_once($path.'/models/helper.php');
 define('POSTIT', 'postit');
 
-function create($postit)
+function createPostit($postit)
 {
     $conn = connect();
     $query = 'INSERT INTO ' . POSTIT . '(`title`, `content`, `date`, `user_id`) VALUES (?,?,?,?);';
@@ -12,14 +13,14 @@ function create($postit)
         if ($statement->execute()) {
             $postit['id'] = $statement->insert_id;
             mysqli_close($conn);
-            return true;
+            return array('success' => true, 'postit_id' => $postit['id']);
         }
         return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
     }
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
 }
 
-function read_all()
+function read_all_postit()
 {
     $conn = connect();
     $query = 'SELECT * FROM ' . POSTIT . ';';
@@ -41,7 +42,7 @@ function read_all()
     }
 }
 
-function read_one($postitId)
+function read_one_postit($postitId)
 {
     $conn = connect();
     $query = 'SELECT id, title, content, date, user_id FROM ' . POSTIT . ' WHERE id = ?';
@@ -62,7 +63,7 @@ function read_one($postitId)
     return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
 }
 
-function read_all_for_one_user($userId)
+function read_all_for_one_user_postit($userId)
 {
     $conn = connect();
     $query = 'SELECT id, title, content, date, user_id FROM ' . POSTIT . ' WHERE user_id = ?';
@@ -87,7 +88,7 @@ function read_all_for_one_user($userId)
     return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
 }
 
-function update($postit)
+function update_postit($postit)
 {
     $conn = connect();
     $query = 'UPDATE ' . POSTIT . ' SET `title`=?,`content`=?,`user_id`=? WHERE id = ?;';
@@ -103,7 +104,7 @@ function update($postit)
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
 }
 
-function delete($postit_id)
+function delete_postit($postit_id)
 {
     $conn = connect();
     $query = 'DELETE FROM ' . POSTIT . ' WHERE id = ?;';
@@ -116,4 +117,24 @@ function delete($postit_id)
         return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
     }
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+}
+
+function get_username_for_postit($postitId){
+    $conn = connect();
+    $query = 'SELECT u.email, u.surname, u.lastname FROM user u INNER JOIN postit p ON u.id = p.user_id WHERE p.id = ?';
+    $statement = $conn->prepare($query);
+    if ($statement->bind_param('i', $postitId)) {
+        if ($statement->execute()) {
+            $result = $statement->get_result();
+            $num = $result ? $result->num_rows : 0;
+            if ($num > 0) {
+                extract($result->fetch_assoc());
+                mysqli_close($conn);
+                return array($email, $surname . ' ' . $lastname);
+            }
+            return "There is no result :(";
+        }
+        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+    }
+    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
 }

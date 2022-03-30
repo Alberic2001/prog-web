@@ -1,7 +1,41 @@
 @import url("header-navigation.css");
+@import url("postit.css");
+
+section ul{
+  margin:0;
+  padding:0;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 1em;
+  min-height: 2em;
+  font-family:'Reenie Beanie';
+}
+
+h3:hover {
+  color: rgb(36, 99, 237)
+}
+
+h2 {
+  font-family:'Reenie Beanie';
+}
+
+
+p {
+
+  padding:10%;
+  font-family: "'Times New Roman', Times, serif";
+  font-size: 0.8rem;
+  line-height: 20px;
+}
+
+section ul li{
+  margin:1em;
+}
 
 .post-it ul {
-  display: flex; 
   list-style-type: none;
   border-top: solid 1px #333;
   margin: 0;
@@ -9,42 +43,32 @@
   width: 100%;
 }
 
-.post-it ul:first-child {
-  border-bottom: solid 1px #333;
-}
-
-p {
-  display: inline-block;
-}
-
 main {
   display: flex;
-  width: 100%;
   min-height: 80vh;
   justify-content: space-evenly;
 }
 
 .post-it {
-  min-height: 60vh;
-  width: 100%;
+  min-height: 10vh;
+
   background-color: white;
   top: 10px;
 }
 
 #post-it-perso .post-it {
-  border: solid 10px #a8f7bd;
+  border: solid 5px #a8f7bd;
 }
 
-#post-it-perso h2 {
+#post-it-perso h2, #list-perso h3 {
   background-color: #a8f7bd;
   margin-bottom: 0;
-  width: 100%;
+
   padding: 10px;
 }
 
-#post-it-partage h2 {
+#post-it-partage h2, #list-partage h3 {
   background-color: #adf5f7;
-  width: 100%;
   margin-bottom: 0;
   padding: 10px;
 }
@@ -56,38 +80,28 @@ main {
 section {
   display: inline-block;
   text-align: center;
-  width: 35%;
+  width: 38%;
   margin: 0 30px 30px 30px;
 }
 
-.post-it ul{
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  justify-content: start;
-  width: 100%;
-  margin: 0px;
-  left: 0px;
-  padding: 0px;
-}
 
 
 .post-it ul {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-direction: row;
+  align-items: flex-start;
   margin: 0;
   padding: 0;
   height: auto;
 }
 
+
+
 .post-it ul li{
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
   margin: 0;
   padding: 0;
-  height: auto;
+  height: 200px;
+  width:35%;
 }
 
 .header {
@@ -98,10 +112,6 @@ section {
 
 #list-perso li .titre {
   flex-basis: 40%;
-}
-
-#list-perso li .date {
-  flex-basis: 15%;
 }
 
 .modif-postit {

@@ -1,6 +1,5 @@
+/* eslint-env jquery */
 $(document).ready(function () {
-  let requestAjax; 
-
   // validate form
   $('#form_inscription').submit(function (event) {
     event.preventDefault();
@@ -8,7 +7,6 @@ $(document).ready(function () {
     $('.message_error').remove();
 
     let formValidation = true;
-
     const email = $('#email').val();
     const password1 = $('#password').val();
     const password2 = $('#password-repeat').val();
@@ -114,25 +112,47 @@ $(document).ready(function () {
       formValidation = false;
     }
 
-    if(formValidation) {
-      let form_data = $(this).serialize();
-      form_data += "&inscription=createUser";
-      console.log(JSON.stringify(form_data))
-      let requestAjax;
-      requestAjax = $.ajax({
-        url: './database/index.php',
+    if(!formValidation) {
+      return;
+    }
+    console.log('insctipton')
+    let url = window.location.host + window.location.pathname;
+    url = url.replace(/\/+/g, "/");
+    url = window.location.protocol + '//' + url;
+    let urlBase = url.substring(0, url.indexOf('inscription.html'));
+
+      let form_data = $(this).serializeArray();
+      form_data.push({ name : "inscription", value : "createUser" });
+      $.ajax({
+        url: urlBase + 'database/index.php',
         method: 'POST',
-        data: JSON.stringify(form_data),
-        contentType: 'application/json; charset=utf-8',
+        data: form_data,
+        dataType: 'json',
         success: function(response) {
-          console.log('success response :');
-          console.log(response)
-        },
+        if(response.success){
+          $('#email , #password, #password-repeat, #nom, #prenom, #birthday').addClass('success');
+          console.log('success');
+          console.log(urlBase+'accueil.php');
+          window.location.replace(urlBase+'accueil.php');
+        } else {
+          console.log('error');
+          const reason = response.reason;
+          const message = response.message;
+          if (reason === 'email') {
+            $('#email').addClass('error');
+            $('#' + reason).after('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + message + '</div>');
+          } else {
+            console.log(message);
+            $('#' + reason).addClass('error');
+            $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + message + '</div>');
+          }
+        }
+      },
         error: function () {
           // error
           console.log('error');
+          $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> Something went wrong</div>');
         }
       });
-    }
   });
 });

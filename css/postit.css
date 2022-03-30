@@ -1,0 +1,68 @@
+section ul li {
+    text-decoration:none;
+    color:#000;
+    display:block;
+    padding:1em;
+    background-color: red;
+  }
+
+  section ul, section li{
+    list-style:none;
+  }
+
+  section ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-group{
+    bottom:15px;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    width: auto;
+  }
+
+  button {
+    border: none;
+  }
+
+  button:hover {
+    color: rgb(36, 99, 237)
+  }
+  
+
+  .modif-postit, .suppr-postit{
+    width:100%;
+    font-size: 15px;
+    padding: 3%;
+  }
+
+  .modif-postit{
+    background-color: greenyellow;
+    color:rgba(29, 27, 27, 0.7);
+  }
+
+  .suppr-postit{
+    color:white;
+    background-color: red;
+  }
+
+
+ #list-perso li {
+    height:15em;
+    width:12em;
+    margin:1em;
+    display:block;
+    box-shadow: 7px 5px 5px rgba(80, 79, 79, 0.7);
+    background:rgb(255, 255, 105);
+ }
+
+ #list-partage li {
+    height:11em;
+    width:10em;
+    margin:1em;
+    box-shadow: 7px 5px 5px rgba(80, 79, 79, 0.7);
+    background:rgb(255, 255, 105);
+ }
