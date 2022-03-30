@@ -1,13 +1,21 @@
 <?php
 
 // include_once('../manager/PostitManager.php');
-// include_once('../manager/UserManager.php');
-include_once('../manager/SharedManager.php');
+//include_once('../manager/UserManager.php');
 // include_once('../manager/SharedManager.php');
 // include_once('../manager/UserManager.php');
-// $date = new DateTime();
-// $postit = postit_builder('First title', 'kadasdv agsesv asgdasveaf', $date->format('Y-m-d H:i:s'), 1);
-// $log = create($postit);
+ /*$path = realpath(dirname(__DIR__) . '/.');
+
+ echo $path;
+ echo $path.'/manager/PostitManager.php';
+
+ include($path.'/manager/PostitManager.php');
+
+ $date = new DateTime();
+ $postit = postit_builder('First title', 'kadasdv agsesv asgdasveaf', $date->format('Y-m-d H:i:s'), 1);
+ $log = createPostit($postit);
+ echo $log;
+ var_dump($log);*/
 // echo '<br />';
 
 // $postit_array = read_all();
@@ -33,16 +41,3 @@ include_once('../manager/SharedManager.php');
 // echo '<br />';
 // $users = read_all();
 // print_r($users);
-
-// echo '<br />';
-// create(shared_builder(1, 1));
-// create(shared_builder(4, 3));
-// create(shared_builder(5, 1));
-// create(shared_builder(6, 3));
-
-echo '<br />';
-$shared = read_all();
-print_r($shared);
-
-echo '<br />';
-print_r(read_all_for_one_user(3));

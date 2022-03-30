@@ -11,6 +11,5 @@ function connect()
         die('Could not Connect My Sql:' . mysql_error());
         return;
     }
-    echo 'Connection established :)';
     return $conn;
 }

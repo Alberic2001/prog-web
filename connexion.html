@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="./css/connexion.css">
-    <script type="text/javascript" src="./connexion.js"></script>
 </head>
 <body>
-    
-    <form  class="connx" method="post">
+    <form id="form-connexion" class="connexion" method="post">
         <h1>Connexion</h1>
         <ul>
-            <li>User Name <input type="text" id="mail" name="mail"/> 
-            <span id="code_msg"> </span>
+            <li>Email <input type="text" id="email" name="email"/> 
         </li>
-            <li>Mot de pass 
-                <input type="password" id="pwd" name="pwd"/>
-                <span id="pwd_msg"></span>
+            <li>Mot de passe
+                <input type="password" id="password" name="password"/>
             </li>
             <li><a href="./inscription.html">Inscrivez-vous!</a></li>
         </ul>
-        <input type="submit" id="login" value="Log in" onclick="check()">
+        <input type="submit" id="login" value="login">
     </form>
+    <!-- script js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./scripts/connexion.js"></script>
 </body>
 </html>

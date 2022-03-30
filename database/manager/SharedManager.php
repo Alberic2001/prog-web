@@ -1,9 +1,11 @@
 <?php
-require_once('../config/Database.php');
-require_once('../models/helper.php');
+
+$path = realpath(dirname(__DIR__) . '/.');
+require_once($path.'/config/Database.php');
+require_once($path.'/models/helper.php');
 define('SHARED', 'shared');
 
-function create($shared)
+function createShared($shared)
 {
     $conn = connect();
     $query = 'INSERT INTO ' . SHARED . '(`user_id`, `postit_id`) VALUES (?,?);';
@@ -19,7 +21,7 @@ function create($shared)
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
 }
 
-function read_all()
+function read_all_shared()
 {
     $conn = connect();
     $query = 'SELECT * FROM ' . SHARED . ';';
@@ -41,7 +43,7 @@ function read_all()
     }
 }
 
-function read_one($shared_id)
+function read_one_shared($shared_id)
 {
     $conn = connect();
     $query = 'SELECT id, user_id, postit_id FROM ' . SHARED . ' WHERE id = ?';
@@ -64,7 +66,7 @@ function read_one($shared_id)
 
 
 
-function read_all_for_one_user($userId)
+function read_all_for_one_user_shared($userId)
 {
     $conn = connect();
     $query = 'SELECT id, user_id, postit_id FROM ' . SHARED . ' WHERE user_id = ?';
@@ -92,7 +94,7 @@ function read_all_for_one_user($userId)
 
 
 
-function update($shared)
+function update_shared($shared)
 {
     $conn = connect();
     $query = 'UPDATE ' . SHARED . ' SET `user_id`=?,`postit_id`=? WHERE id = ?;';
@@ -108,7 +110,7 @@ function update($shared)
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
 }
 
-function delete($id)
+function delete_shared($id)
 {
     $conn = connect();
     $query = 'DELETE FROM ' . SHARED . ' WHERE id = ?;';
@@ -121,4 +123,29 @@ function delete($id)
         return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
     }
     return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+}
+
+function read_all_postits($postitId){
+    $conn = connect();
+    $query = 'SELECT id, user_id, postit_id FROM ' . SHARED . ' WHERE postit_id = ?';
+    $statement = $conn->prepare($query);
+
+    if ($statement->bind_param('s', $postitId)) {
+        if ($statement->execute()) {
+            $result = $statement->get_result();
+            $num = $result ? $result->num_rows : 0;
+            if ($num > 0) {
+                $shared_array = array();
+                while ($row = $result->fetch_assoc()) {
+                    extract($row);
+                    $shared_item = shared_builder($postit_id, $user_id, $id);
+                    array_push($shared_array, $shared_item);
+                }
+                mysqli_close($conn);
+                return $shared_array;
+            }
+        }
+        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+    }
+    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
 }

@@ -4,7 +4,7 @@ body {
     font-size: 16px;
     background-image: url(../img/backgroung.svg);
     background-color: #f8f8ff;
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
     font-family: "Montserrat", sans-serif;
   }
@@ -32,7 +32,8 @@ body {
     margin: 0 10px;
   }
 
-  .nav-list li:first-child form button {
+  a#link {
+    text-decoration: none;
     border: solid 2px #2a2a2b;
     background-color: #FCF171;
     color: #2a2a2b;
@@ -41,7 +42,7 @@ body {
     padding: 10px 12px;
   }
   
-  .nav-list li:first-child form button:hover {
+  a#link:hover {
     background-color: #2a2a2b;
     color: #fdf171;
   }
@@ -71,7 +72,7 @@ body {
     font-size:1.2rem;
   }
 
-  .nav-list li:first-child form button , button#logout {
+  a#link , button#logout {
     font-size: 0.9rem;
   }
 

@@ -1,5 +1,6 @@
 ul{
     list-style: none;
+    padding-left: 0;
 }
 body {
     font-family: Arial, sans-serif;
@@ -15,10 +16,10 @@ a {
     box-sizing: border-box;
 }
 
-.connx {
+form.connexion {
     width: 500px;
     padding: 16px;
-    margin: auto;
+    margin: 0 auto;
     background-color: white;
 }
 
@@ -57,12 +58,22 @@ h1 {
     opacity: 0.5;
 }
 
-
-.ok {
-    color: green;
-    /* border: 1px solid green; */
-}
 .error {
-    color: red;
-    /* border: 1px solid red; */
+    background-color: #E05254 !important;
+    color: black;
+}
+
+.message_error {
+    background-color: #E05254 !important;
+    border: solid 1px #910001 !important;
+    color: #7A2C2C !important;
+    margin-top:-22px !important;
+    margin-bottom:15px !important;
+    text-align: center;
+}
+
+.success {
+    border: solid 1px #359100 !important;
+    background-color: #81e052 !important;
+    color: black;
 }
