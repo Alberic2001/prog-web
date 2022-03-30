@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 09 mars 2022 à 11:26
+-- Généré le : mer. 30 mars 2022 à 10:13
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -31,9 +31,14 @@ CREATE TABLE `postit` (
   `id` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
   `content` text NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `postit`
+--
+
 
 -- --------------------------------------------------------
 
@@ -47,6 +52,7 @@ CREATE TABLE `shared` (
   `postit_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
 -- --------------------------------------------------------
 
 --
@@ -57,10 +63,12 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `surname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
   `birth_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 --
 -- Index pour les tables déchargées
@@ -71,14 +79,14 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `postit`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `postit_ibfk_1` (`user_id`);
 
 --
 -- Index pour la table `shared`
 --
 ALTER TABLE `shared`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `postit_id` (`postit_id`);
+  ADD KEY `shared_ibfk_1` (`postit_id`);
 
 --
 -- Index pour la table `user`
@@ -94,19 +102,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `postit`
 --
 ALTER TABLE `postit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `shared`
 --
 ALTER TABLE `shared`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Contraintes pour les tables déchargées
@@ -116,13 +124,13 @@ ALTER TABLE `user`
 -- Contraintes pour la table `postit`
 --
 ALTER TABLE `postit`
-  ADD CONSTRAINT `postit_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `postit_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `shared`
 --
 ALTER TABLE `shared`
-  ADD CONSTRAINT `shared_ibfk_1` FOREIGN KEY (`postit_id`) REFERENCES `postit` (`id`);
+  ADD CONSTRAINT `shared_ibfk_1` FOREIGN KEY (`postit_id`) REFERENCES `postit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
