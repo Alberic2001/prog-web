@@ -1,5 +1,16 @@
 /* eslint-env jquery */
+let shared_init = [];
+
 $(document).ready(function () {
+
+  let shared_init = [];
+  let create = true;
+  // si post it à modifier
+  if ($('h2').text().trim() === 'MODIFIER POST IT') {
+    shared_init = $('.checkbox_user:checkbox:checked').siblings('input:hidden').clone();
+    create = false;
+  }
+
   // validate form
   $('#form_post').submit(function (event) {
     event.preventDefault();
@@ -40,35 +51,51 @@ $(document).ready(function () {
       }
     });
 
-    console.log(form_data)
+    let url = window.location.host + window.location.pathname;
+    url = url.replace(/\/+/g, "/");
+    url = window.location.protocol + '//' + url;
 
-    let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-    console.log(url)
-    let urlIndex = url.substring(0, url.indexOf('ajout_post_it.php'));
-    urlIndex += 'database/index.php';
-    form_data.push({ name: "ajoutPostit", value: "true" });
-    form_data.push({ name: "edition", value: "create" });
+    if (create) {
+      form_data.push({ name: "addPostit", value: "create" });
+    } else {
+      form_data.push({ name: "addPostit", value: "update" });
+      Object.keys(shared_init).forEach((key) => {
+        if (shared_init[key].id != null) {
+          form_data.push({name: "shared_init[]", value: shared_init[key].id });
+        }
+      });
+      form_data.push({ name: "postit_id", value: $('#postit_id').val() });
+    }
+
     $.ajax({
-      url: urlIndex,
+      url: url,
       method: 'POST',
       data: form_data,
       dataType: 'json',
       crossDomain: true,
       success: function (response) {
-        console.log(response)
         if (response.success) {
-          console.log('success');
-          console.log(response);
-          $('#btn_reset').click();
+          if (create) {
+            alert('le postit a été crée');
+            $('#btn_reset').click();
+          } else {
+            alert('le postit a été modifié');
+            window.location.replace(url + '?addPostitPage=create');
+          }
         } else {
-          console.log('error');
+          if (create) {
+            alert("le postit n'a pas été crée");
+          } else {
+            alert("le postit n'a pas été modifié");
+          }
+          $('#btn_reset').click();
         }
       },
       error: function () {
         // error
         console.log('error requete');
+        alert("veuillez recommencer !");
       }
     });
-
   });
 });

@@ -17,8 +17,10 @@ h2 {
     flex-wrap:wrap;
     align-items: center;
     justify-content: center;
-    height:90vh;
+    min-height:90vh;
     width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 5em;
 }
 
 .container > form {
@@ -133,6 +135,8 @@ input[type="checkbox"] {
     width: 80%;
     margin-left:10%;
     text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .btn {
@@ -180,4 +184,8 @@ input[type="checkbox"] {
     margin-top:0px;
     margin-left:11%;
     text-align: center;
+}
+
+.display {
+    display: none;
 }

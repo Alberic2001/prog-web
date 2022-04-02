@@ -1,8 +1,5 @@
 <?php
 
-$path = realpath(dirname(__DIR__) . '/.');
-require_once($path.'/config/Database.php');
-require_once($path.'/models/helper.php');
 define('SHARED', 'shared');
 
 function createShared($shared)
@@ -14,11 +11,12 @@ function createShared($shared)
         if ($statement->execute()) {
             $shared['id'] = $statement->insert_id;
             mysqli_close($conn);
-            return true;
+            return array('success' => true);
         }
-        return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Something went wrong ! (" . $statement->errno . ") " . $statement->error);
     }
-    return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+    
+    return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
 }
 
 function read_all_shared()
@@ -37,9 +35,10 @@ function read_all_shared()
                 array_push($shared_array, $shared_item);
             }
             mysqli_close($conn);
+            $shared_array['success'] = true;
             return $shared_array;
         }
-        return 'There is nothing in the table !!';
+        return message_builder(false, 'database', 'There is nothing in the table !!');
     }
 }
 
@@ -55,13 +54,15 @@ function read_one_shared($shared_id)
             if ($num > 0) {
                 extract($result->fetch_assoc());
                 mysqli_close($conn);
-                return shared_builder($postit_id, $user_id, $id);
+                $shared = shared_builder($postit_id, $user_id, $id);
+                $shared['success'] = true;
+                return $shared;
             }
-            return "There is no result :(";
+            return message_builder(false, 'database', "There is no result :(");        
         }
-        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);        
     }
-    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
+    return message_builder(false, "database", "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
 }
 
 
@@ -84,45 +85,29 @@ function read_all_for_one_user_shared($userId)
                     array_push($shared_array, $shared_item);
                 }
                 mysqli_close($conn);
+                $shared_array['success'] = true;
+
                 return $shared_array;
             }
         }
-        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
     }
-    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
+    return message_builder(false, "database", "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
 }
 
-
-
-function update_shared($shared)
+function delete_shared($user_id, $postit_id)
 {
     $conn = connect();
-    $query = 'UPDATE ' . SHARED . ' SET `user_id`=?,`postit_id`=? WHERE id = ?;';
+    $query = 'DELETE FROM ' . SHARED . ' WHERE user_id = ? AND postit_id = ?;';
     $statement = $conn->prepare($query);
-    if ($statement->bind_param('iii', $shared['user_id'], $shared['postit_id'], $shared['id'])) {
-        if ($statement->execute()) {
-            $shared['id'] = $statement->insert_id;
-            mysqli_close($conn);
-            return true;
-        }
-        return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
-    }
-    return "Can't bind params (" . $statement->errno . ") " . $statement->error;
-}
-
-function delete_shared($id)
-{
-    $conn = connect();
-    $query = 'DELETE FROM ' . SHARED . ' WHERE id = ?;';
-    $statement = $conn->prepare($query);
-    if ($statement->bind_param('i', $id)) {
+    if ($statement->bind_param('ii', $user_id, $postit_id)) {
         if ($statement->execute()) {
             mysqli_close($conn);
-            return true;
+            return array('success' => true);
         }
-        return "Something went wrong ! (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Something went wrong ! (" . $statement->errno . ") " . $statement->error);
     }
-    return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+    return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
 }
 
 function read_all_postits($postitId){
@@ -142,10 +127,11 @@ function read_all_postits($postitId){
                     array_push($shared_array, $shared_item);
                 }
                 mysqli_close($conn);
+                $shared_array['success'] = true;
                 return $shared_array;
             }
         }
-        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
     }
-    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
+    return message_builder(false, "database", "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
 }

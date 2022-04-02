@@ -1,7 +1,5 @@
 <?php
-$path = realpath(dirname(__DIR__) . '/.');
-require_once($path.'/config/Database.php');
-require_once($path.'/models/helper.php');
+
 define('USER', 'user');
 
 function email_exists($conn, $user)
@@ -26,13 +24,13 @@ function sign_up($user)
         if ($statement->bind_param('sssss', $user['email'], $hashed_password, $user['surname'], $user['lastname'], $user['birth_date'])) {
             if ($statement->execute()) {
                 $user['id'] = $statement->insert_id;
-                return array('success' => true, 'id'=>$user['id'], 'surname'=>$user['surname'], 'lastname'=>$user['lastname']);
+                return array('success' => true, 'email' => $email, 'id'=>$user['id'], 'surname'=>$user['surname'], 'lastname'=>$user['lastname']);
             }
-            message_builder(false, 'database' ,'database error');
+            return message_builder(false, 'database' ,'database error');
         }
-        message_builder(false, 'database', 'database error');
+        return message_builder(false, 'database', 'database error');
     }
-    message_builder(false, 'email' , 'Email already exists');
+    return message_builder(false, 'email' , 'Email already exists');
 }
 
 function sign_in($email, $input_password)
@@ -50,16 +48,17 @@ function sign_in($email, $input_password)
                     return array('success' => true, 'id'=>$id,'email' => $email ,'surname' => $surname, 'lastname' => $lastname);
                 }
                 mysqli_close($conn);
-                message_builder(false,  'password' ,'Password incorrect :(');
+                return message_builder(false,  'password' ,'Password incorrect :(');
             }
-            message_builder(false, 'email', 'Email does not exist :(');
+            return message_builder(false, 'email', 'Email does not exist :(');
         }
-        message_builder(false, 'database' , 'database error');
+        return message_builder(false, 'database' , 'database error');
     }
-    message_builder(false, 'database' , 'database error');
+    return message_builder(false, 'database' , 'database error');
 }
 
-function read_all(){
+function read_all_user()
+{
     $conn = connect();
     $query = 'SELECT * FROM ' . USER . ';';
     $statement = $conn->prepare($query);
@@ -74,13 +73,15 @@ function read_all(){
                 array_push($user_array, $user);
             }
             mysqli_close($conn);
+            $user_array['success'] = true;
             return $user_array;
         }
-        return 'There is nothing in the table !!';
+        return message_builder(false, 'sql' , 'There is nothing in the table !!');
     }
 }
 
-function get_email_for_userId($userId){
+function get_email_for_userId($userId)
+{
     $conn = connect();
     $query = 'SELECT email FROM user WHERE id = ?';
     $statement = $conn->prepare($query);
@@ -91,11 +92,11 @@ function get_email_for_userId($userId){
             if ($num > 0) {
                 extract($result->fetch_assoc());
                 mysqli_close($conn);
-                return $email;
+                return array('success' => true, 'email' => $email);
             }
-            return "There is no result :(";
+            return message_builder(false, 'sql' , 'There is no result :(');
         }
-        return "Can't bind params (" . $statement->errno . ") " . $statement->error;
+        return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
     }
-    return "Can't prepare the query (" . $statement->errno . ") " . $statement->error;
+    return message_builder(false, 'database', "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
 }

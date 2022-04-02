@@ -32,8 +32,7 @@ body {
     margin: 0 10px;
   }
 
-  a#link {
-    text-decoration: none;
+  button#link {
     border: solid 2px #2a2a2b;
     background-color: #FCF171;
     color: #2a2a2b;
@@ -42,7 +41,7 @@ body {
     padding: 10px 12px;
   }
   
-  a#link:hover {
+  button#link:hover {
     background-color: #2a2a2b;
     color: #fdf171;
   }
@@ -61,7 +60,7 @@ body {
     color: #2a2a2b;
   }
   
-  button#logout:active, .nav-list li:first-child form button:active {
+  button#logout:active, button#link:active {
     font-size: 1.1em;
   }
 
@@ -72,7 +71,7 @@ body {
     font-size:1.2rem;
   }
 
-  a#link , button#logout {
+  button#link , button#logout {
     font-size: 0.9rem;
   }
 

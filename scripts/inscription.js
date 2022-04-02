@@ -14,145 +14,150 @@ $(document).ready(function () {
     const prenom = $('#prenom').val();
     const birthday = $('#birthday').val();
 
-    function ValidateEmail(mail) {
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-        return (true)
-      }
-      return (false)
-    }
-
     // email
-    if(email === '') {
-      $('#email').addClass('error');
-      $('#email').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> L'email ne doit pas être vide</div>");
+    if (email === '') {
+      message_error('#email', "L'email ne doit pas être vide");
       formValidation = false;
-    } else if(!ValidateEmail(email)) {
-      $('#email').addClass('error');
-      $('#email').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Vous avez rentrez un email invalide !</div>");
+    } else if (!ValidateEmail(email)) {
+      message_error('#email', 'Vous avez rentrez un email invalide !');
       formValidation = false;
     }
 
     // nom
     if (nom === '') {
-      $('#nom').addClass('error');
-      $('#nom').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Veuillez rentrer un nom </div>");
+      message_error('#nom', 'Veuillez rentrer un nom');
       formValidation = false;
-    } else if(nom.length > 50) {
-      $('#nom').addClass('error');
-      $('#nom').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Nom trop long !</div>");
+    } else if (nom.length > 50) {
+      message_error('#nom','Nom trop long ! > 150 caractères');
       formValidation = false;
     }
 
     // prenom
     if (prenom === '') {
-      $('#prenom').addClass('error');
-      $('#prenom').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Veuillez rentrer un prenom </div>");
+      message_error('#prenom', 'Veuillez rentrer un prenom');
       formValidation = false;
-    } else if(prenom.length > 50) {
-      $('#prenom').addClass('error');
-      $('#prenom').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Prenom trop long !</div>");
+    } else if (prenom.length > 50) {
+      message_error('#prenom', 'Prénom trop long !');
       formValidation = false;
     }
 
-    //Birthday
-    // Validates that the input string is a valid date formatted as 'mm/dd/yyyy'
-    function isValidDate(dateString) {
-    // First check for the pattern
-      if (!/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString))
-        return false;
-
-      // Parse the date parts to integers
-      let parts = dateString.split('/');
-      let day = parseInt(parts[2], 10);
-      let month = parseInt(parts[1], 10);
-      let year = parseInt(parts[0], 10);
-
-      // return alert(`Day :${day} Month :${month} year:${year}`);
-
-      // Check the ranges of month and year
-      if (year < 1000 || year > 3000 || month == 0 || month > 12)
-        return false;
-
-      let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-      // Adjust for leap years
-      if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-        monthLength[1] = 29;
-
-      // Check the range of the day
-      return day > 0 && day <= monthLength[month - 1];
-    };
-
-    // birthday
+    // Birthday
     if (!isValidDate(birthday)) {
-      $('#birthday').addClass('error');
-      $('#birthday').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Erreur de format de la date!</div>");
+      message_error('#birthday', 'Erreur de format de la date ! ex format : 1999/02/31');
       formValidation = false;
     }
 
     if (password1 === '') {
-      $('#password').addClass('error');
-      $('#password').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Le mot de passe ne doit pas être vide !</div>");
+      message_error('#password', 'Le mot de passe ne doit pas être vide !');
       formValidation = false;
     } else if (password1.length < 6) {
-      $('#password').addClass('error');
-      $('#password').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Mot de passe trop faible !</div>");
+      if (password1 !== password2) {
+        message_error('#password', 'Mot de passe trop faible ! Taille minimum 6 caractères + Les mots de passe ne sont pas les mêmes !');
+        formValidation = false;
+      } else {
+        message_error('#password', 'Mot de passe trop faible ! Taille minimum 6 caractères');
+        formValidation = false;
+      }
+    } else if (password1 !== password2) {
+      message_error('#password', 'Les mots de passe ne sont pas les mêmes !');
       formValidation = false;
     }
+
     if (password2 === '') {
-      $('#password-repeat').addClass('error');
-      $('#password-repeat').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Le mot de passe de confirmation ne doit pas être vide !</div>");
+      message_error('#password-repeat', 'Le mot de passe de confirmation ne doit pas être vide !');
+      formValidation = false;
+    } else if (password2.length < 6) {
+      if (password1 !== password2) {
+        message_error('#password-repeat', 'Mot de passe trop faible ! Taille minimum 6 caractères + Les mots de passe ne sont pas les mêmes !');
+        formValidation = false;
+      } else {
+        message_error('#password-repeat', 'Mot de passe trop faible ! Taille minimum 6 caractères');
+        formValidation = false;
+      }
+    } else if (password1 !== password2) {
+      message_error('#password-repeat', 'Les mots de passe ne sont pas les mêmes !');
       formValidation = false;
     }
-    // Check confirm password
 
-    if (password1 !== password2) {
-      $('#password, #password-repeat').addClass('error');
-      $('#password, #password-repeat').after("<div class='message_error'><i class='fa fa-exclamation-triangle'></i> Les mots de passe ne sont pas les mêmes !</div>");
-      formValidation = false;
-    }
-
-    if(!formValidation) {
+    if (!formValidation) {
       return;
     }
-    console.log('insctipton')
+
     let url = window.location.host + window.location.pathname;
     url = url.replace(/\/+/g, "/");
     url = window.location.protocol + '//' + url;
-    let urlBase = url.substring(0, url.indexOf('inscription.html'));
+    const urlBase = url.substring(0, url.indexOf('inscription.html'));
 
-      let form_data = $(this).serializeArray();
-      form_data.push({ name : "inscription", value : "createUser" });
-      $.ajax({
-        url: urlBase + 'database/index.php',
-        method: 'POST',
-        data: form_data,
-        dataType: 'json',
-        success: function(response) {
-        if(response.success){
+    let form_data = $(this).serializeArray();
+    form_data.push({ name: "sign_up", value: "createUser" });
+
+    // ajax
+    $.ajax({
+      url: urlBase + 'database/index.php',
+      method: 'POST',
+      data: form_data,
+      dataType: 'json',
+      success: function (response) {
+        console.log(response);
+        if (response.success) {
           $('#email , #password, #password-repeat, #nom, #prenom, #birthday').addClass('success');
-          console.log('success');
-          console.log(urlBase+'accueil.php');
-          window.location.replace(urlBase+'accueil.php');
+          // redirection
+          window.location.replace(urlBase + 'database/index.php?home');
         } else {
-          console.log('error');
-          const reason = response.reason;
-          const message = response.message;
-          if (reason === 'email') {
-            $('#email').addClass('error');
-            $('#' + reason).after('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + message + '</div>');
+          console.log('error params');
+          if (response.reason === 'email') {
+            message_error('#' + response.reason, response.message);
           } else {
-            console.log(message);
-            $('#' + reason).addClass('error');
-            $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + message + '</div>');
+            console.log(response.message);
+            $('#' + response.reason).addClass('error');
+            $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + response.message + '</div>');
           }
         }
       },
-        error: function () {
-          // error
-          console.log('error');
-          $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> Something went wrong</div>');
-        }
-      });
+      error: function () {
+        console.log('error');
+        $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> Erreur envoi de données</div>');
+      }
+    });
   });
 });
+
+// validate email
+function ValidateEmail (email) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    return (true)
+  }
+  return (false)
+}
+
+// validate that the input string is a valid date formatted as 'yyyy/mm/dd'
+function isValidDate(dateString) {
+  // First check for the pattern
+  if (!/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString)) {
+    return false;
+  }
+  // Parse the date parts to integers
+  const parts = dateString.split('/');
+  const day = parseInt(parts[2], 10);
+  const month = parseInt(parts[1], 10);
+  const year = parseInt(parts[0], 10);
+
+  // Check the ranges of month and year
+  if (year < 1000 || year > 3000 || month == 0 || month > 12) {
+    return false;
+  }
+
+  let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  // Adjust for leap years
+  if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+    monthLength[1] = 29;
+  }
+  // Check the range of the day
+  return day > 0 && day <= monthLength[month - 1];
+};
+
+function message_error(element, message) {
+  $(element).addClass('error');
+  $(element).after('<div class="message_error"><i class="fa fa-exclamation-triangle"></i>' + message + '</div>');
+}

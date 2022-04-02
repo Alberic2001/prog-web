@@ -1,107 +1,108 @@
 <?php
-    require_once(__DIR__.'/cors.php');
-    require_once(__DIR__.'/controller.php');
-    ob_start();
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require (__ROOT__.'/database/cors.php');
 
-    // inscription
-    if(isset($_POST['inscription'])) {
-        if ($_POST['inscription'] === 'createUser') {
-            $res = incription();
-            // initialise la session
-            session_set_cookie_params(['samesite' => 'None']);
-            session_start();
-            $_SESSION['user_id'] = $res['id'];
-            $_SESSION['user_name'] = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
-            header('Content-Type: application/json');
-            ob_end_clean();
-            echo json_encode($res);
-            exit();
-        } else {
-            header('Content-Type: application/json');
-            ob_end_clean();
-            echo json_encode(array('success' => false));
-            exit();
-        }
-    }
-
-    // connexion
-    if(isset($_POST['login'])) {
-        if ($_POST['login'] === 'loginUser') {
-
-            $res = login();
-            if($res) {
-                // initialise la session
-                //ini_set('session.cookie_samesite', 'None');
-                session_start();
-                $_SESSION['user_id'] = $res['id'];
-                var_dump($_SESSION['user_id']);
-                var_dump($res['id']);
-
-                $_SESSION['user_name'] = $res['surname'];
-                ob_end_clean();
+    // sign up
+    if(isset($_POST['sign_up'])) {
+        require (__ROOT__.'/database/auth_controller.php');
+        if ($_POST['sign_up'] === 'createUser') {
+            $res = sign_up_user(); 
+            if ($res) {
                 header('Content-Type: application/json');
                 echo json_encode($res);
                 exit();
             }
             else {
                 header('Content-Type: application/json');
-                ob_end_clean();
-                echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong'));
+                echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong try again'));
                 exit();
             }
         }
     }
 
-    // ajout post it 
-    if(isset($_POST['ajoutPostit'])) {
-        echo 'postit';
-        if ($_POST['ajoutPostit'] === 'true') {
-                echo 'avant function';
-                
-                $res = ajoutPostit();
-                echo 'après function';
-
-                
-                if($res) {
-                    header('Content-Type: application/json');
-                    ob_end_clean();
-                    echo json_encode($res);
-                    exit();
-                }
-                else {
-                    header('Content-Type: application/json');
-                    ob_end_clean();
-                    echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong'));
-                    exit();
-                }
+    // login
+    if(isset($_POST['login'])) {
+        require (__ROOT__.'/database/auth_controller.php');
+        if ($_POST['login'] === 'loginUser') {
+            $res = login();
+            if($res) {
+                header('Content-Type: application/json');
+                echo json_encode($res);
+                exit();
+            }
+            else {
+                header('Content-Type: application/json');
+                echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong try again'));
+                exit();
             }
         }
+    }
 
-        // supprimer post it 
-        if(isset($_POST['deletePostit'])) {
-            echo 'postit';
-            if ($_POST['deletePostit'] === 'true') { 
-                    //echo 'apres delete postit it true '; 
-                    $res = deletePostit();     
-                    if($res) {
-                        //echo 'ok res'; 
-                        header('Content-Type: application/json');
-                        ob_end_clean();
-                        echo json_encode(array('success' => $res));
-                        exit();
-                    }
-                    else {
-                        header('Content-Type: application/json');
-                        ob_end_clean();
-                        echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong'));
-                        exit();
-                    }
-                }
-            }    
-
-    // deconnexion
+    // logout
     if(isset($_GET['logout'])) {
-        echo 'dunction logout';
+        require (__ROOT__.'/database/auth_controller.php');
         logout();
+    }
+
+    // home
+    if(isset($_GET['home'])) {
+        require (__ROOT__.'/database/page_controller.php');
+        home();
+    }
+
+    // add Postit Page
+    if(isset($_POST['addPostitPage']) || isset($_GET['addPostitPage']) ) {
+        if($_POST['addPostitPage'] == 'create' || $_POST['addPostitPage'] == 'update' || $_GET['addPostitPage'] == 'create' ) {
+            require (__ROOT__.'/database/page_controller.php');
+            addPostitPage();
+        }
+    }
+
+    // visualisation Postit
+    if(isset($_POST['visualisation'])) {
+        if($_POST['visualisation'] == 'postit') {
+            require (__ROOT__.'/database/page_controller.php');
+            visualisationPostit();
+        }
+    }
+    
+    // ajout post it 
+    if(isset($_POST['addPostit'])) {
+        require (__ROOT__.'/database/page_controller.php');
+        if ($_POST['addPostit'] === 'create' || $_POST['addPostit'] === 'update') { 
+            $res = addPostit();
+            if($res) {
+                header('Content-Type: application/json');
+                echo json_encode($res);
+                exit();
+            }
+            else {
+                echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong try again'));
+                exit();
+            }
+        }
+    }
+
+    // supprimer post it 
+    if(isset($_POST['deletePostit'])) {
+        require (__ROOT__.'/database/page_controller.php');
+        if ($_POST['deletePostit'] === 'true') { 
+            $res = deletePostit();     
+            if($res) {
+                header('Content-Type: application/json');
+                echo json_encode($res);
+                exit();
+            }
+            else {
+                header('Content-Type: application/json');
+                echo json_encode(array('success' => false, 'reason' => 'php' ,'message' => 'Something went wrong try again'));
+                exit();
+            }
+        }
+    }
+
+    if(!isset($_POST) && !isset($_GET) ) {
+        require (__ROOT__.'/database/page_controller.php');
+        home();        
     }
 ?>
