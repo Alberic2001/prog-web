@@ -24,7 +24,7 @@ function sign_up($user)
         if ($statement->bind_param('sssss', $user['email'], $hashed_password, $user['surname'], $user['lastname'], $user['birth_date'])) {
             if ($statement->execute()) {
                 $user['id'] = $statement->insert_id;
-                return array('success' => true, 'email' => $email, 'id'=>$user['id'], 'surname'=>$user['surname'], 'lastname'=>$user['lastname']);
+                return array('success' => true, 'email' => $user['email'], 'id' => $user['id'] , 'surname' => $user['surname'], 'lastname' => $user['lastname']);
             }
             return message_builder(false, 'database' ,'database error');
         }

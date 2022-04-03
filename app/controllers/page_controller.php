@@ -72,7 +72,7 @@
     function addPostitPage() {
         require (__ROOT__.'/app/models/UserManager.php');
         $arrayUser = read_all_user();
-        if ($_POST['addPostitPage'] == 'create' || $_GET['addPostitPage'] == 'create') {
+        if ($_POST['addPostitPage'] == 'create' ) {
             $create = true;
             if(isset($arrayUser) && $arrayUser['success']) {
                 $shared_array = array();
@@ -91,8 +91,8 @@
             $postit = read_one_postit($_POST['postit_id']);
             $postit['name'] = $_SESSION['user_name'];
             $user_shared = read_all_postits($_POST['postit_id']);
-            $time = strtotime($dateInUTC.' UTC');
-            $dateInLocal = date("Y-m-d", $time);
+            // $time = strtotime($dateInUTC.' UTC');
+            $dateInLocal = date("Y-m-d");
             if($arrayUser['success']) {
                 $shared_array = array();
                 unset($arrayUser["success"]);
@@ -101,10 +101,12 @@
                     if($user["id"] != $_SESSION['user_id']){
                         $in_shared = false;
                         foreach($user_shared as $shared){
+                            if(isset($shared['user_id'])){
                             if($user["id"] == $shared['user_id']){
                                 $in_shared = true;
                                 break;
                             }
+                        }
                         }
                         if($in_shared) {
                             $user['checked'] = 'checked';
@@ -129,16 +131,29 @@
             if(!isset($createPostit) || !$createPostit['success']){
                 return $createPostit;
             }
-
-            $users = array_map('intval', $_POST["user_id"] );
-            foreach($users as $user) {
-                $userShared = shared_builder($createPostit["postit_id"], $user,1);
-                $sharedCreate = createShared($userShared);
-                if(!isset($sharedCreate) || !$sharedCreate['success']){
-                    return $sharedCreate;
+            if(isset($_POST["user_id"]) && count($_POST["user_id"]) != 0) {
+                $users = array_map('intval', $_POST["user_id"] );
+                foreach($users as $user) {
+                    $userShared = shared_builder($createPostit["postit_id"], $user,1);
+                    $sharedCreate = createShared($userShared);
+                    if(!isset($sharedCreate) || !$sharedCreate['success']){
+                        return $sharedCreate;
+                    }
                 }
             }
-            return $createPostit;
+
+            //  $users = array_map('intval', $_POST["user_id"] );
+            //  foreach($users as $user) {
+                 
+                
+            //     $userShared = shared_builder($createPostit["postit_id"], $user,1);
+            //     $sharedCreate = createShared($userShared);
+            //     if(!isset($sharedCreate) || !$sharedCreate['success']){
+            //         return $sharedCreate;
+            //     }
+            //  }
+            
+             return $createPostit;
         } else {
             // create postit
             $postit = postit_builder($_POST['title'], $_POST['content'], date("y/m/d"), $_SESSION['user_id'],$_POST['postit_id']);
@@ -149,20 +164,29 @@
                 return $updatePostit;
             }
             // array of users shared
-            $users = array_map('intval', $_POST["user_id"] );
-            // array of users initially shared
-            $shared_init = array_map('intval', $_POST["shared_init"] );
+           if(isset($_POST["user_id"]) && count($_POST["user_id"]) != 0) {
+                // array of users shared
+                $users = array_map('intval', $_POST["user_id"]);
+            } else {
+                $users = [];
+            }
+            if(isset($_POST["shared_init"]) && count($_POST["shared_init"]) != 0) {
+                // array of users initially shared
+                $shared_init = array_map('intval', $_POST["shared_init"] );
+            } else {
+                $shared_init = [];
+            }
             // update shared
             foreach($users as $user) {
                 if(in_array($user, $shared_init)) {
                     $key = array_search($user, $shared_init);
-                    if($key !== false){
+                    if($key !== false && isset($shared_init[$key])){
                         unset($shared_init[$key]);
                     }
                 } else {
                     $userShared = shared_builder($_POST['postit_id'], $user,1);
                     $sharedCreate = createShared($userShared);
-                    if(!isset($sharedCreate) || !$sharedCreate['success']) {
+                    if(!isset($sharedCreate) || !isset($sharedCreate['success'])) {
                         return $sharedCreate;
                     }
                 }

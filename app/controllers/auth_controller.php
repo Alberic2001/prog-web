@@ -29,7 +29,7 @@
         if ($user_signup['success']) {
             session_start();
             $_SESSION['user_id'] = $user_signup['id'];
-            $_SESSION['user_name'] = $prenom.' '.$nom;
+            $_SESSION['user_name'] = $user_signup['surname'].' '.$user_signup['lastname'];
             $_SESSION['email'] = $user_signup['email'];
         }
         return $user_signup;

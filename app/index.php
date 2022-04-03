@@ -51,8 +51,8 @@
     }
 
     // add Postit Page
-    if(isset($_POST['addPostitPage']) || isset($_GET['addPostitPage']) ) {
-        if($_POST['addPostitPage'] == 'create' || $_POST['addPostitPage'] == 'update' || $_GET['addPostitPage'] == 'create' ) {
+    if(isset($_POST['addPostitPage']) ) {
+        if($_POST['addPostitPage'] == 'create' || $_POST['addPostitPage'] == 'update' ) {
             require (__ROOT__.'/app/controllers/page_controller.php');
             addPostitPage();
         }
