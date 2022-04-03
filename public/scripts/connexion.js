@@ -2,9 +2,9 @@
 $(document).ready(function () {
   // login form
   $('#form-connexion').submit(function (event) {
-    event.preventDefault();
     $('#email , #password').removeClass('error');
     $('.message_error').remove();
+    event.preventDefault();
 
     let formValidation = true;
 
@@ -36,7 +36,7 @@ $(document).ready(function () {
     form_data.push({ name: "login", value: "loginUser" });
 
     $.ajax({
-      url: urlBase + 'database/index.php',
+      url: urlBase + 'app/index.php',
       method: 'POST',
       data: form_data,
       dataType: 'json',
@@ -45,7 +45,7 @@ $(document).ready(function () {
         if (response.success) {
           $('#email , #password').addClass('success');
           console.log('success');
-          window.location.replace(urlBase + 'database/index.php?home=true');
+          window.location.replace(urlBase + 'app/index.php?home=true');
         } else {
           console.log('error');
           if (response.reason !== 'email' && response.reason !== 'password') {

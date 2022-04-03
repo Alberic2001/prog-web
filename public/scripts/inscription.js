@@ -93,7 +93,7 @@ $(document).ready(function () {
 
     // ajax
     $.ajax({
-      url: urlBase + 'database/index.php',
+      url: urlBase + 'app/index.php',
       method: 'POST',
       data: form_data,
       dataType: 'json',
@@ -102,7 +102,7 @@ $(document).ready(function () {
         if (response.success) {
           $('#email , #password, #password-repeat, #nom, #prenom, #birthday').addClass('success');
           // redirection
-          window.location.replace(urlBase + 'database/index.php?home');
+          window.location.replace(urlBase + 'app/index.php?home');
         } else {
           console.log('error params');
           if (response.reason === 'email') {

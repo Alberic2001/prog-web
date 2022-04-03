@@ -66,6 +66,7 @@ $(document).ready(function () {
       });
       form_data.push({ name: "postit_id", value: $('#postit_id').val() });
     }
+    console.log(url)
 
     $.ajax({
       url: url,
@@ -94,7 +95,7 @@ $(document).ready(function () {
       error: function () {
         // error
         console.log('error requete');
-        alert("veuillez recommencer !");
+        alert("une erreur s'est produite veuillez recommencer");
       }
     });
   });

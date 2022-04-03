@@ -16,10 +16,10 @@
         exit();
     }
 
-    require (__ROOT__.'/database/config/Database.php');
-    require (__ROOT__.'/database/models/Helper.php');
-    require (__ROOT__.'/database/manager/UserManager.php');
-
+    require (__ROOT__.'/app/database/config/Database.php');
+    require (__ROOT__.'/app/utils/helper.php');
+    require (__ROOT__.'/app/models/UserManager.php');
+    
     // sign up user
     function sign_up_user() {
         $user = user_builder($_POST['email'], $_POST['password'], $_POST['prenom'], $_POST['nom'], date('Y-m-d', strtotime($_POST['birthday'])), 1);

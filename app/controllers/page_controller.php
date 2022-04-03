@@ -1,8 +1,7 @@
 <?php
-
-    require (__ROOT__.'/database/config/Database.php');
-    require (__ROOT__.'/database/models/helper.php');
-    require (__ROOT__.'/database/manager/PostitManager.php');
+    require (__ROOT__.'/app/database/config/Database.php');
+    require (__ROOT__.'/app/utils/helper.php');
+    require (__ROOT__.'/app/models/PostitManager.php');
 
     date_default_timezone_set('Europe/Paris');
 
@@ -13,13 +12,13 @@
 
     // redirect user if not logged
     if(!isset($_SESSION['user_id'])) {
-        header("Location: http://".$_SERVER['HTTP_HOST']."/projet-ter/database/index.php?logout");
+        header("Location: http://".$_SERVER['HTTP_HOST']."/projet-ter/app/index.php?logout");
         exit();
     }
 
     // page home
     function home() {
-        require (__ROOT__.'/database/manager/SharedManager.php');
+        require (__ROOT__.'/app/models/SharedManager.php');
         $user_postit = read_all_for_one_user_postit($_SESSION['user_id']);
         $user_shared = read_all_for_one_user_shared($_SESSION['user_id']);
         if (isset($user_shared) && $user_shared['success']) {
@@ -33,13 +32,13 @@
                 }
             }
         }
-        require (__ROOT__.'/accueil.php');
+        require (__ROOT__.'/app/views/accueil.php');
     }
 
     // page visualisation postit
     function visualisationPostit() {
-        require (__ROOT__.'/database/manager/SharedManager.php');
-        require (__ROOT__.'/database/manager/UserManager.php');
+        require (__ROOT__.'/app/models/SharedManager.php');
+        require (__ROOT__.'/app/models/UserManager.php');
 
         $postit = read_one_postit($_POST['postit_id']);
         $user_name = '';
@@ -66,12 +65,12 @@
         if(isset($_POST['edition']) && $_POST['edition'] == "true") {
             $edition = true;
         }
-        require (__ROOT__.'/visualisation_post_it.php');
+        require (__ROOT__.'/app/views/visualisation_post_it.php');
     }
 
     // page add postit
     function addPostitPage() {
-        require (__ROOT__.'/database/manager/UserManager.php');
+        require (__ROOT__.'/app/models/UserManager.php');
         $arrayUser = read_all_user();
         if ($_POST['addPostitPage'] == 'create' || $_GET['addPostitPage'] == 'create') {
             $create = true;
@@ -87,7 +86,7 @@
             }
         } else {
             // update postit 
-            require (__ROOT__.'/database/manager/SharedManager.php');
+            require (__ROOT__.'/app/models/SharedManager.php');
             $create = false;
             $postit = read_one_postit($_POST['postit_id']);
             $postit['name'] = $_SESSION['user_name'];
@@ -117,12 +116,12 @@
                 }
             }
         }
-        require (__ROOT__.'/ajout_post_it.php');
+        require (__ROOT__.'/app/views/ajout_post_it.php');
     }
 
     // add postit 
     function addPostit() {
-        require (__ROOT__.'/database/manager/SharedManager.php');
+        require (__ROOT__.'/app/models/SharedManager.php');
         if($_POST['addPostit'] == "create") {
             $postit = postit_builder($_POST['title'], $_POST['content'], date("y/m/d"), $_SESSION['user_id'], 1);
             $createPostit = createPostit($postit);
@@ -184,7 +183,7 @@
         $delete = delete_postit($_POST['postit_id']);
         if(isset($delete) && $delete['success']) {
             if(isset($_POST['location']) && $_POST['location'] == 'visualisationPostit') {
-                header("Location: http://".$_SERVER['HTTP_HOST']."/projet-ter/database/index.php?home");
+                header("Location: http://".$_SERVER['HTTP_HOST']."/projet-ter/app/index.php?home");
                 exit();
             } else {
                 return $delete;
