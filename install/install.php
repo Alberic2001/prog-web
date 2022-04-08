@@ -1,12 +1,7 @@
 <?php
-
-    $url="localhost";
-    $username="root";
-    $password="";
-    $db_name = "projet_ter";
-    $conn;
-
-    $conn = mysqli_connect($url,$username,$password);
+    include './database/Database.php';
+    
+    $conn = connect();
 
     if(mysqli_connect_errno()){
         die("Could not Connect My Sql: " .mysqli_connect_error()."<br>");
@@ -32,7 +27,7 @@
         echo "Database ".$db_name." selected <br>";
     }
 
-    $sqlFile = file_get_contents("./projet_ter.sql");
+    $sqlFile = file_get_contents("./database/projet_ter.sql");
 
     if($conn->multi_query($sqlFile)){
         echo "Tables successfully created.<br>";
