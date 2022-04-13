@@ -32,7 +32,8 @@ CREATE TABLE `postit` (
   `title` varchar(150) NOT NULL,
   `content` text NOT NULL,
   `date` datetime NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `like` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -48,6 +49,21 @@ CREATE TABLE `postit` (
 
 CREATE TABLE `shared` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `postit_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   `postit_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -131,6 +147,16 @@ ALTER TABLE `postit`
 --
 ALTER TABLE `shared`
   ADD CONSTRAINT `shared_ibfk_1` FOREIGN KEY (`postit_id`) REFERENCES `postit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`postit_id`) REFERENCES `postit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
