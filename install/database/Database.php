@@ -1,10 +1,5 @@
 <?php
-    $url = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db_name = 'projet_ter';
-
-    function connect()
+    function connect($url, $username, $password)
     {
         $conn = mysqli_connect($url, $username, $password);
         if (!$conn) {

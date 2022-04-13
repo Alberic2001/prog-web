@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="backgroung.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="mm"
+     inkscape:snap-tangential="false"
+     inkscape:snap-perpendicular="false"
+     inkscape:zoom="0.53540264"
+     inkscape:cx="561.25984"
+     inkscape:cy="398.76531"
+     inkscape:window-width="1280"
+     inkscape:window-height="653"
+     inkscape:window-x="271"
+     inkscape:window-y="106"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1936"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1432"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1143"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect11002"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect10945"
+       is_visible="true"
+       lpeversion="1" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1054">
+      <rect
+         style="fill:#ff0000;stroke:#b2b2b2;stroke-width:0.264583"
+         id="rect1056"
+         width="590.9267"
+         height="181.5265"
+         x="-117.79912"
+         y="-158.35289" />
+    </clipPath>
+    <linearGradient
+       id="linearGradient3168">
+      <stop
+         id="stop3170"
+         style="stop-color:#f7ec9a"
+         offset="0" />
+      <stop
+         id="stop3176"
+         style="stop-color:#f6ea8d"
+         offset=".13401" />
+      <stop
+         id="stop3180"
+         style="stop-color:#f5e98a"
+         offset=".45674" />
+      <stop
+         id="stop3178"
+         style="stop-color:#f8ed9d"
+         offset=".80934" />
+      <stop
+         id="stop3172"
+         style="stop-color:#f5e98a"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1464"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1462" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <ellipse
+       style="fill:#fcf171;fill-rule:evenodd;stroke-width:0.376063"
+       id="path47"
+       cx="148.76859"
+       cy="2.317874"
+       rx="156.76416"
+       ry="120.15375"
+       clip-path="url(#clipPath1054)"
+       transform="matrix(-1.0611611,0,0,-0.95387396,312.36164,14.435674)" />
+  </g>
+</svg>

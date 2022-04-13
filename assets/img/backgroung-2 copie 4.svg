@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="backgroung-2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="mm"
+     inkscape:snap-tangential="false"
+     inkscape:snap-perpendicular="false"
+     inkscape:zoom="0.53540264"
+     inkscape:cx="208.25448"
+     inkscape:cy="398.76531"
+     inkscape:window-width="1280"
+     inkscape:window-height="653"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1936"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1432"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1143"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect11002"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect10945"
+       is_visible="true"
+       lpeversion="1" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1054">
+      <rect
+         style="fill:#ff0000;stroke:#b2b2b2;stroke-width:0.264583"
+         id="rect1056"
+         width="590.9267"
+         height="181.5265"
+         x="-117.79912"
+         y="-158.35289" />
+    </clipPath>
+    <linearGradient
+       id="linearGradient3168">
+      <stop
+         id="stop3170"
+         style="stop-color:#f7ec9a"
+         offset="0" />
+      <stop
+         id="stop3176"
+         style="stop-color:#f6ea8d"
+         offset=".13401" />
+      <stop
+         id="stop3180"
+         style="stop-color:#f5e98a"
+         offset=".45674" />
+      <stop
+         id="stop3178"
+         style="stop-color:#f8ed9d"
+         offset=".80934" />
+      <stop
+         id="stop3172"
+         style="stop-color:#f5e98a"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1464"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1462" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <ellipse
+       style="fill:#fcf171;fill-rule:evenodd;stroke-width:0.376063"
+       id="path47"
+       cx="148.76859"
+       cy="2.317874"
+       rx="156.76416"
+       ry="120.15375"
+       clip-path="url(#clipPath1054)"
+       transform="matrix(-1.0611611,0,0,-0.95387396,321.75099,18.389085)" />
+    <g
+       id="g4360"
+       transform="matrix(0.06645857,0,0,0.06537169,41.512773,84.681983)">
+      <path
+         d="M 467.4095,264.94912 H 345.59016 V 156.5624 H 467.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4225" />
+      <path
+         d="M 469.90967,267.44922 H 343.09033 V 154.0625 h 126.81934 z m -121.81934,-5 H 464.90967 V 159.0625 H 348.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#cccccc"
+         id="path4227" />
+      <polygon
+         points="135.493,586.077 129.66,538.789 147.755,538.79 147.753,586.078 "
+         fill="#ffb7b7"
+         id="polygon4229" />
+      <path
+         d="m 493.96951,725.47582 -39.53076,-10e-4 v -0.5 a 15.3873,15.3873 0 0 1 15.38647,-15.38623 h 10e-4 l 24.144,0.001 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2f2e41"
+         id="path4231" />
+      <polygon
+         points="250.187,581.177 234.349,536.24 252.023,532.36 262.162,578.548 "
+         fill="#ffb7b7"
+         id="polygon4233" />
+      <path
+         d="m 610.85474,716.99943 -38.6113,8.47639 -0.10723,-0.48836 a 15.38732,15.38732 0 0 1 11.72872,-18.328 l 9.5e-4,-2.1e-4 23.58248,-5.177 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2f2e41"
+         id="path4235" />
+      <path
+         d="m 456.43436,547.47725 -60.55575,13.06184 c -11.614,-21.89446 -14.22377,-44.76462 -14.32048,-66.39235 l 60.55543,-13.0618 a 135.60092,135.60092 0 0 0 14.3208,66.39231 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2219c4"
+         id="path4237" />
+      <polygon
+         points="51.766,376.455 83.236,370.097 83.752,372.397 52.282,378.755 "
+         fill="#ffffff"
+         id="polygon4239" />
+      <polygon
+         points="53.83,385.654 85.3,379.296 85.816,381.596 54.346,387.953 "
+         fill="#ffffff"
+         id="polygon4241" />
+      <polygon
+         points="55.894,394.852 87.364,388.495 87.88,390.794 56.41,397.152 "
+         fill="#ffffff"
+         id="polygon4243" />
+      <polygon
+         points="57.958,404.051 89.428,397.693 89.944,399.993 58.474,406.351 "
+         fill="#ffffff"
+         id="polygon4245" />
+      <polygon
+         points="60.022,413.25 91.492,406.892 92.008,409.191 60.538,415.549 "
+         fill="#ffffff"
+         id="polygon4247" />
+      <path
+         d="m 594.50133,493.81605 a 11.62615,11.62615 0 0 0 -4.982,-17.117 l 0.54867,-26.56205 -16.06037,-4.27033 -0.248,37.52166 a 11.68915,11.68915 0 0 0 20.74163,10.42776 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffb7b7"
+         id="path4249" />
+      <path
+         d="m 440.24266,246.87863 -61.93258,-1.40222 c -6.19485,-23.99742 -3.40586,-46.84642 1.53768,-67.9018 l 61.93224,1.40218 a 135.60083,135.60083 0 0 0 -1.53734,67.90184 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2219c4"
+         id="path4251" />
+      <polygon
+         points="47.401,62.71 79.487,63.857 79.453,66.214 47.368,65.067 "
+         fill="#ffffff"
+         id="polygon4253" />
+      <polygon
+         points="47.266,72.137 79.352,73.284 79.318,75.64 47.233,74.493 "
+         fill="#ffffff"
+         id="polygon4255" />
+      <polygon
+         points="47.131,81.563 79.217,82.71 79.183,85.067 47.097,83.92 "
+         fill="#ffffff"
+         id="polygon4257" />
+      <polygon
+         points="46.996,90.989 79.082,92.136 79.048,94.493 46.962,93.346 "
+         fill="#ffffff"
+         id="polygon4259" />
+      <polygon
+         points="46.861,100.416 78.946,101.563 78.913,103.919 46.827,102.772 "
+         fill="#ffffff"
+         id="polygon4261" />
+      <circle
+         cx="126.71087"
+         cy="22.459431"
+         r="22.45944"
+         fill="#2219c4"
+         id="circle4263" />
+      <polygon
+         points="125.784,30.52 138.091,12.471 139.518,13.444 125.91,33.403 117.404,23.006 118.742,21.912 "
+         fill="#ffffff"
+         id="polygon4265" />
+      <path
+         d="M 854.4095,455.94912 H 732.59016 V 347.5624 H 854.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4267" />
+      <path
+         d="M 856.90967,458.44922 H 730.09033 V 345.0625 h 126.81934 z m -121.81934,-5 H 851.90967 V 350.0625 H 735.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#e6e6e6"
+         id="path4269" />
+      <path
+         d="M 854.4095,264.94912 H 732.59016 V 156.5624 H 854.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4271" />
+      <path
+         d="M 856.90967,267.44922 H 730.09033 V 154.0625 h 126.81934 z m -121.81934,-5 H 851.90967 V 159.0625 H 735.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#e6e6e6"
+         id="path4273" />
+      <path
+         d="M 660.4095,455.94912 H 538.59016 V 347.5624 H 660.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4275" />
+      <path
+         d="M 662.90967,458.44922 H 536.09033 V 345.0625 h 126.81934 z m -121.81934,-5 H 657.90967 V 350.0625 H 541.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#cccccc"
+         id="path4277" />
+      <path
+         d="M 467.4095,455.94912 H 345.59016 V 347.5624 H 467.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4279" />
+      <path
+         d="M 469.90967,458.44922 H 343.09033 V 345.0625 h 126.81934 z m -121.81934,-5 H 464.90967 V 350.0625 H 348.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#e6e6e6"
+         id="path4281" />
+      <path
+         d="M 660.4095,264.94912 H 538.59016 V 156.5624 H 660.4095 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffffff"
+         id="path4283" />
+      <path
+         d="M 662.90967,267.44922 H 536.09033 V 154.0625 h 126.81934 z m -121.81934,-5 H 657.90967 V 159.0625 H 541.09033 Z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#e6e6e6"
+         id="path4285" />
+      <path
+         d="m 643.49868,769.27237 16.27423,-31.54126 c 30.03216,4.94037 35.33276,3.93085 61.57648,0.52368 l 6.97775,34.231 a 378.16618,378.16618 0 0 0 -84.82846,-3.21342 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#e6e6e6"
+         id="path4287" />
+      <polygon
+         points="367.794,618.336 369.658,618.406 370.168,636.14 368.304,636.07 "
+         fill="#ffffff"
+         id="polygon4289" />
+      <polygon
+         points="360.336,618.053 362.201,618.124 362.711,635.858 360.847,635.787 "
+         fill="#ffffff"
+         id="polygon4291" />
+      <polygon
+         points="352.879,617.771 354.743,617.841 355.254,635.575 353.389,635.505 "
+         fill="#ffffff"
+         id="polygon4293" />
+      <path
+         d="m 468.39226,451.99393 c 0,0 -5.9104,2.36413 0,92.2019 l 2.36414,146.57733 h 23.64148 l 26.60977,-199.19855 32.494,92.81177 29.55188,109.933 23.64147,-5.91038 c 0,0 -24.82361,-222.23023 -46.101,-236.4151 -21.27739,-14.18487 -92.20174,3e-5 -92.20174,3e-5 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2f2e41"
+         id="path4295" />
+      <circle
+         cx="172.77673"
+         cy="117.94477"
+         r="24.56942"
+         fill="#ffb8b8"
+         id="circle4297" />
+      <path
+         d="m 539.31676,285.32126 c 0,0 -21.27734,-10.63867 -41.37262,-3.54624 -20.09528,7.09243 -30.734,15.367 -30.734,15.367 l 13.00281,68.56036 -17.73108,92.20188 c 0,0 91.01984,-7.09247 99.29431,0 8.27447,7.09247 8.27454,-8.27454 8.27454,-8.27454 l -7.09247,-87.47357 13.00287,-55.55753 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#3f3d56"
+         id="path4299" />
+      <path
+         d="m 494.95892,243.76409 5.20108,13.28844 c 2.13134,5.44539 4.57243,11.27134 9.56836,14.31034 6.16828,3.75216 14.40559,1.92259 20.37269,-2.142 a 31.81312,31.81312 0 0 0 -14.31932,-57.90282 l -0.24691,4.44763 -5.45772,-4.57469 a 5.306,5.306 0 0 1 -8.24787,1.16642 c 1.43367,2.97177 -0.221,6.59623 -2.61041,8.87276 -2.93577,2.79666 -11.332,6.15776 -10.98353,11.15707 0.23246,3.3363 5.37042,7.9194 6.72363,11.37685 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#2f2e41"
+         id="path4301" />
+      <path
+         d="m 449.51256,495.38894 a 11.62611,11.62611 0 0 0 0.0242,-17.82728 l 7.98411,-25.33966 -14.21547,-8.60766 -10.77251,35.94286 a 11.68915,11.68915 0 0 0 16.97968,15.83174 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#ffb7b7"
+         id="path4303" />
+      <path
+         d="m 475.48467,297.142 h -8.27454 c 0,0 -13.00283,8.27453 -13.00283,20.09527 0,11.82074 -18.91318,150.12363 -18.91318,150.12363 l 20.09527,3.54621 17.73114,-96.93021 13.00287,-26.00568 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#3f3d56"
+         id="path4305" />
+      <path
+         d="m 553.5017,306.59863 h 22.45941 c 0,0 7.09247,7.09244 10.63867,23.64151 3.5462,16.54907 7.09247,81.5632 7.09247,81.5632 l -2.36413,59.1038 H 573.597 l -2.36413,-76.8349 -11.82077,-49.64716 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#3f3d56"
+         id="path4307" />
+      <path
+         d="m 726.988,726.57461 h -381 a 1,1 0 0 1 0,-2 h 381 a 1,1 0 0 1 0,2 z"
+         transform="translate(-343.09033,-127.51419)"
+         fill="#cbcbcb"
+         id="path4309" />
+    </g>
+  </g>
+</svg>

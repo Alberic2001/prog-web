@@ -41,11 +41,11 @@
     </header>
     <div class="container">
         <form method="post" id="form_post">
-        <?php 
-            if (!$create) { 
-                echo "<input type='hidden' value='". htmlspecialchars($_POST['postit_id']) ."' id='postit_id' />";
-            }
-        ?>
+            <?php 
+                if (!$create) { 
+                    echo "<input type='hidden' value='". htmlspecialchars($_POST['postit_id']) ."' id='postit_id' />";
+                }
+            ?>
             <div class="form-content base">
                 <h2>
                     <i class="fa fa-edit"></i> 
@@ -117,12 +117,13 @@
                 <div class="partage">
                     <p> <i class="fa fa-users"></i> Liste de partage </p>
                     <p>-- Selectionner les utilisateurs --</p>
-                    <ul>
+                    <input type="text" id="users-search" placeholder="recherche utilisateur" />                    
+                    <ul class='users-list'>
                         <?php
                             if(isset($shared_array)){
                                 foreach($shared_array as $shared) {
                                     echo '<li>';
-                                    echo "<input type='hidden' id='".$shared["id"]."' value='". htmlspecialchars($shared["email"]) ."' />";
+                                    echo "<input type='hidden' id='postit_shared-".$shared["id"]."' value='". htmlspecialchars($shared["email"]) ."' />";
                                     echo "<input type='checkbox' name='user_id[]' value='". htmlspecialchars($shared["email"]) ."' ".$shared["checked"] ." class='checkbox_user' />";
                                     echo htmlspecialchars($shared["email"])."</li>";
                                 }
@@ -133,6 +134,12 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="popup-overlay display">
+        <div class="popup-content">
+            <p class="popup-content-text"><span class="popup-text"></span></p>
+            <button class="popup-close">Fermer</button>
+        </div>
     </div>
     <!-- script js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

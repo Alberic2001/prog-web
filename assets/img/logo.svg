@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="161mm"
+   height="82mm"
+   viewBox="0 0 161 82"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.39108446"
+     inkscape:cx="290.21864"
+     inkscape:cy="-53.696841"
+     inkscape:window-width="1280"
+     inkscape:window-height="660"
+     inkscape:window-x="42"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     units="mm" />
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient1464"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1462" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#a8f7bd;fill-opacity:1;stroke:#ffffff;stroke-width:0.742;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect846"
+       width="49.757702"
+       height="49.757702"
+       x="-26.599997"
+       y="32.760799"
+       transform="rotate(-45.491405)"
+       inkscape:export-filename="/Users/reinemanounou/Downloads/rect846.png"
+       inkscape:export-xdpi="95.099998"
+       inkscape:export-ydpi="95.099998" />
+    <rect
+       style="fill:#f6eedf;fill-opacity:1;stroke:#ffffff;stroke-width:0.742;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect846-8"
+       width="49.757702"
+       height="49.757702"
+       x="0.64790148"
+       y="64.253044"
+       transform="rotate(-45.972438)"
+       inkscape:export-filename="/Users/reinemanounou/Downloads/rect846.png"
+       inkscape:export-xdpi="95.099998"
+       inkscape:export-ydpi="95.099998" />
+    <rect
+       style="fill:#adf5f7;fill-opacity:1;stroke:#ffffff;stroke-width:0.742;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1106"
+       width="49.766872"
+       height="49.766872"
+       x="44.557663"
+       y="83.297073"
+       transform="rotate(-39.020431)"
+       inkscape:export-filename="/Users/reinemanounou/Downloads/rect846.png"
+       inkscape:export-xdpi="95.099998"
+       inkscape:export-ydpi="95.099998" />
+    <text
+       xml:space="preserve"
+       style="font-size:20.8139px;line-height:1.25;font-family:'PT Mono';-inkscape-font-specification:'PT Mono';stroke-width:0.264583"
+       x="20.655191"
+       y="47.567039"
+       id="text2408-5"
+       inkscape:export-filename="/Users/reinemanounou/Downloads/rect846.png"
+       inkscape:export-xdpi="95.099998"
+       inkscape:export-ydpi="95.099998"><tspan
+         sodipodi:role="line"
+         id="tspan2406-5"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.8139px;font-family:'PT Mono';-inkscape-font-specification:'PT Mono Bold';fill:#ffffff;stroke-width:0.264583"
+         x="20.655191"
+         y="47.567039">POSTIT APP</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20.8139px;line-height:0;font-family:'PT Mono';-inkscape-font-specification:'PT Mono';stroke-width:0.264583"
+       x="22.55596"
+       y="46.173279"
+       id="text2408"
+       inkscape:export-filename="/Users/reinemanounou/Downloads/rect846.png"
+       inkscape:export-xdpi="95.099998"
+       inkscape:export-ydpi="95.099998"><tspan
+         sodipodi:role="line"
+         id="tspan2406"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.8139px;line-height:0.5;font-family:'PT Mono';-inkscape-font-specification:'PT Mono Bold';stroke-width:0.264583"
+         x="22.55596"
+         y="46.173279"
+         dx="0 0 0 0 0 0 0 0.050000001">POSTIT<tspan
+   style="font-size:20.8139px;letter-spacing:-0.0185208px;word-spacing:-0.0132292px"
+   id="tspan7225"
+   dx="-0.050000001"> </tspan>APP</tspan></text>
+  </g>
+</svg>

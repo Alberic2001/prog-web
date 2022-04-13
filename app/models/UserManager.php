@@ -100,3 +100,24 @@ function get_email_for_userId($userId)
     }
     return message_builder(false, 'database', "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
 }
+
+function user_info($userId)
+{
+    $conn = connect();
+    $query = 'SELECT * FROM user WHERE id = ?';
+    $statement = $conn->prepare($query);
+    if ($statement->bind_param('i', $userId)) {
+        if ($statement->execute()) {
+            $result = $statement->get_result();
+            $num = $result ? $result->num_rows : 0;
+            if ($num > 0) {
+                extract($result->fetch_assoc());
+                mysqli_close($conn);
+                return array('success' => true, 'email' => $email, 'surname' =>  $surname, 'lastname' => $lastname, 'birth_date' =>  $birth_date);
+            }
+            return message_builder(false, 'sql' , 'There is no result :(');
+        }
+        return message_builder(false, 'database', "Can't bind params (" . $statement->errno . ") " . $statement->error);
+    }
+    return message_builder(false, 'database', "Can't prepare the query (" . $statement->errno . ") " . $statement->error);
+}

@@ -45,7 +45,7 @@ $(document).ready(function () {
         if (response.success) {
           $('#email , #password').addClass('success');
           console.log('success');
-          window.location.replace(urlBase + 'app/index.php?home=true');
+          window.location.replace(urlBase + 'app/index.php?home=true&from=0');
         } else {
           console.log('error');
           if (response.reason !== 'email' && response.reason !== 'password') {

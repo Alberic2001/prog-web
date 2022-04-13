@@ -33,15 +33,17 @@
   <div class="container">
       <div class="tableau">
         <div class="content">
-            <h2>Titre Post it : <span id="titre">
+            <h2>Titre Post it : <br>
+              <span id="titre">
               <?php 
                 echo htmlspecialchars($postit['title']);
               ?>
-            </span></h2>
+              </span>
+            </h2>
             <p>Propriétaire Post it : 
-                <span id="Propriétaire">
-                  <?php echo htmlspecialchars($user_name); ?>
-                </span>
+              <span id="Propriétaire">
+                <?php echo htmlspecialchars($user_name); ?>
+              </span>
             </p>
             <p>Contenu du Post it : 
             </p>
@@ -51,7 +53,7 @@
             <?php
               if($edition) {
                 echo '<div id="edit-post-it">
-                <p hidden>'.$_POST['postit_id'].'</p><button id="edit-post">
+                <p hidden>postit_id-'.$_POST['postit_id'].'</p><button id="edit-post">
                 Editer</button><button id="delete-post">Supprimer</button></div>';
               }
             ?>
