@@ -32,6 +32,7 @@
             </ul>
         </nav>
     </header>
+    <!--
     <div class="grid-container">
         <div class="user-content">
             <div class="user-img">
@@ -51,7 +52,6 @@
                 <p></p>
             </div>
         </div>
-        <!--<div class="user-bio">test</div>-->
         <div class="user-activity">test</div> 
         <div class="user-postit-perso">test</div>
 
@@ -69,10 +69,10 @@
 
         <div class="user-postit-partage">test</div>
         <div class="user-postit-favoris">test</div>
-        <!-- <div class="user-top-postit">test</div>
-        -->
+        <div class="user-top-postit">test</div>
     </div>
-    <!-- script js -->
+    <!-- script js 
+    -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src=".././assets/scripts/compte.js"></script>
 </body>
