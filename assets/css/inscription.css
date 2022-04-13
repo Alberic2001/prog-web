@@ -1,10 +1,37 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #cecece;
+    background-image: url(../img/backgroung-2-2.svg);
+    background-color: #f8f8ff;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+
+.line {
+    background-color: #ccbc0a;
+    height: 0.7rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+#logo{
+    height:6rem;
+    width: 6rem;
+    padding: 0;
+    margin: 0.8rem;
 }
 
 a {
-    color: #00bd00;
+    color: #ccbc0a;
 }
 
 * {
@@ -16,6 +43,7 @@ a {
     padding: 16px;
     margin: 0 auto;
     background-color: white;
+    border-radius: 2em;
 }
 
 input[type=text],
@@ -40,7 +68,7 @@ hr {
 }
 
 .submit {
-    background-color: #0900bd;
+    background-color: orange;
     color: white;
     padding: 15px 18px;
     margin: 8px 0;

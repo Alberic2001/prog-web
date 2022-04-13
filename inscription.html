@@ -10,36 +10,49 @@
 </head>
 
 <body>
-    <form method="POST" id="form_inscription">
-        <div class="register">
-            <h1>Inscription</h1>
-            <p>Please fill in your information</p>
-            <hr>
-            <label for="emailname"><b>Email</b></label>
-            <input type="text" placeholder="login@domaine.extension" name="email" id="email">
+    <header>
+        <div class="line"></div>
+        <nav>
+            <img id="logo" src="./assets/img/postit.png">
+        </nav>
+    </header>
+    <main>
+        <form method="POST" id="form_inscription">
+            <div class="register">
+                <h1>Inscription</h1>
+                <p>Please fill in your information</p>
+                <hr>
+                <label for="emailname"><b>Email</b></label>
+                <input type="text" placeholder="login@domaine.extension" name="email" id="email">
 
-            <label for="username"><b>Nom</b></label>
-            <input type="text" placeholder="Nom" name="nom" id="nom">
+                <label for="username"><b>Nom</b></label>
+                <input type="text" placeholder="Nom" name="nom" id="nom">
 
-            <label for="username"><b>Prenom</b></label>
-            <input type="text" placeholder="Prenom" name="prenom" id="prenom">
+                <label for="username"><b>Prenom</b></label>
+                <input type="text" placeholder="Prenom" name="prenom" id="prenom">
 
-            <label for="birthday"><b>Birthday:</b> </label>
-            <input type="text" placeholder="AAAA/MM/JJ" name="birthday" id="birthday">
+                <label for="birthday"><b>Birthday:</b> </label>
+                <input type="text" placeholder="AAAA/MM/JJ" name="birthday" id="birthday">
 
-            <label for="password"><b>Mot de passe</b></label>
-            <input type="password" placeholder="******" name="password" id="password">
+                <label for="password"><b>Mot de passe</b></label>
+                <input type="password" placeholder="******" name="password" id="password">
 
-            <label for="password-repeat"><b>Confirmer votre mot de passe</b></label>
-            <input type="password" placeholder="******" name="password-repeat" id="password-repeat">
-
-            <hr>
-            <button type="submit" class="submit">Inscrire</button>
-        </div>
-        <div class="register login">
-            <p>Have you already an account? <a href="./connexion.html">Sign in</a>.</p>
-        </div>
-    </form>
+                <label for="password-repeat"><b>Confirmer votre mot de passe</b></label>
+                <input type="password" placeholder="******" name="password-repeat" id="password-repeat">
+                <!--</div>
+                <hr>
+                <button type="submit" class="submit">Inscrire</button>
+  
+                <div class="register login">
+                    <p>Have you already an account? <a href="./connexion.html">Sign in</a>.</p>
+                </div> -->
+                <p>Have you already an account? <a href="./connexion.html">Sign in</a>.</p>
+                <br>
+                <button type="submit" class="submit">S'inscrire</button>
+                <hr>
+            </div>
+        </form>
+    </main>
     <!-- script js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/scripts/inscription.js"></script>

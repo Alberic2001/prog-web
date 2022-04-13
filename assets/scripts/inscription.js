@@ -102,7 +102,7 @@ $(document).ready(function () {
         if (response.success) {
           $('#email , #password, #password-repeat, #nom, #prenom, #birthday').addClass('success');
           // redirection
-          window.location.replace(urlBase + 'app/index.php?home');
+          window.location.replace(urlBase + 'app/index.php?home=true&from=0');
         } else {
           console.log('error params');
           if (response.reason === 'email') {

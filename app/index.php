@@ -44,6 +44,12 @@
         logout();
     }
 
+    // profil
+    if(isset($_GET['account'])) {
+        require (__ROOT__.'/app/controllers/page_controller.php');
+        account();
+    }    
+
     // home
     if(isset($_GET['home'])) {
         require (__ROOT__.'/app/controllers/page_controller.php');
@@ -68,7 +74,7 @@
     
     // ajout post it 
     if(isset($_POST['addPostit'])) {
-        require (__ROOT__.'/app/controllers/page_controller.php');
+        require (__ROOT__.'/app/controllers/page_action_controller.php');
         if ($_POST['addPostit'] === 'create' || $_POST['addPostit'] === 'update') { 
             $res = addPostit();
             if($res) {
@@ -85,7 +91,7 @@
 
     // supprimer post it 
     if(isset($_POST['deletePostit'])) {
-        require (__ROOT__.'/app/controllers/page_controller.php');
+        require (__ROOT__.'/app/controllers/page_action_controller.php');
         if ($_POST['deletePostit'] === 'true') { 
             $res = deletePostit();     
             if($res) {

@@ -3,7 +3,7 @@ $(document).ready(function () {
 // edit post it
   if ($('#edit-post-it')) {
     $('#edit-post').click(function () {
-      const PostitId = $(this).siblings('p:hidden').text()
+      const PostitId = $(this).siblings('p:hidden').text().split('-')[1];
       let url = window.location.host + window.location.pathname;
       url = url.replace(/\/+/g, "/");
       url = window.location.protocol + '//' + url;
@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
 
     $('#delete-post').click(function () {
-      const PostitId = $(this).siblings('p:hidden').text()
+      const PostitId = $(this).siblings('p:hidden').text().split('-')[1];
       const EditionName = 'deletePostit';
       const EditionValue = 'true';
       const LocationName = 'location';

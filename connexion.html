@@ -8,18 +8,31 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/connexion.css">
 </head>
 <body>
-    <form id="form-connexion" class="connexion" method="post">
-        <h1>Connexion</h1>
-        <ul>
-            <li>Email <input type="text" id="email" name="email"/> 
-            </li>
-            <li>Mot de passe
-                <input type="password" id="password" name="password"/>
-            </li>
-            <li><a href="./inscription.html">Inscrivez-vous!</a></li>
-        </ul>
-        <input type="submit" id="login" value="login">
-    </form>
+    <header>
+        <div class="line"></div>
+        <nav>
+            <img id="logo" src="./assets/img/postit.png">
+        </nav>
+    </header>
+    <main class="flex-container">
+        <form id="form-connexion" class="connexion" method="post">
+            <h1>Connexion</h1>
+            <ul>
+                <li>Email <input type="text" id="email" name="email"/> 
+                </li>
+                <li>Mot de passe
+                    <input type="password" id="password" name="password"/>
+                </li>
+                <hr>            
+                <li>
+                    <p>
+                        <a href="./inscription.html">Inscrivez-vous!</a>
+                    </p>
+                </li>
+            </ul>
+            <input type="submit" id="login" value="login">
+        </form>
+    </main>
     <!-- script js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/scripts/connexion.js"></script>

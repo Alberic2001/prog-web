@@ -7,12 +7,13 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
     font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
   }
 
   h1 {
     color: #333;
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 2rem;
   }
   
   nav {
@@ -32,51 +33,46 @@ body {
     margin: 0 10px;
   }
 
-  button#link {
-    border: solid 2px #2a2a2b;
-    background-color: #FCF171;
+  nav ul li button {
     color: #2a2a2b;
-    border-radius: 20px;
-    font-size: 1rem;
-    padding: 10px 12px;
-  }
-  
-  button#link:hover {
-    background-color: #2a2a2b;
-    color: #fdf171;
+    background-color: #fdf171;
+    border: none;
+    font-size: 1.1rem;
   }
 
-  button#logout {
-    border: solid 2px #2a2a2b;
-    background-color: #2a2a2b;
-    color: #fdf171;
-    border-radius: 20px;
-    font-size: 1rem;
-    padding: 10px 12px;
+  nav ul li button:hover {
+    border-bottom-color: #2a2a2b;
+    color: #2a2a2b;
+    border-bottom-width: 0.1em;
+    border-bottom-style: solid;
+    padding: 0;
+    padding-bottom: 0.2em;  
   }
   
-  button#logout:hover {
+  button#logout {
     background-color: #fdf171;
     color: #2a2a2b;
+    border: none;
+    border-bottom-color: #2a2a2b;
+    border-bottom-width: 0.1em;
+    border-bottom-style: solid;
+    padding: 0;
+    padding-bottom: 0.2em;
   }
   
-  button#logout:active, button#link:active {
-    font-size: 1.1em;
+  nav ul li button:active {
+    font-size: 1.2em;
   }
 
 @media screen and (max-width: 825px) {
 
   h1 {
-    margin-left: 10px;
+    margin-left: 0.8rem;
     font-size:1.2rem;
   }
 
-  button#link , button#logout {
+  nav ul li button {
     font-size: 0.9rem;
-  }
-
-  button#logout {
-    border: solid 4px #2a2a2b;
   }
 
   nav ul li {

@@ -1,7 +1,12 @@
 <?php
     include './database/Database.php';
     
-    $conn = connect();
+    $url = 'localhost';
+    $username = 'root';
+    $password = '';
+    $db_name = 'projet_ter2';
+
+    $conn = connect($url, $username, $password);
 
     if(mysqli_connect_errno()){
         die("Could not Connect My Sql: " .mysqli_connect_error()."<br>");
