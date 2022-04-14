@@ -30,88 +30,88 @@ $(document).ready(function () {
   // validate form
   $('#form_inscription').submit(function (event) {
     event.preventDefault();
-    $('#email , #password, #password-repeat, #nom, #prenom, #birthday').removeClass('error');
-    $('.message_error').remove();
+    $(
+      "#email , #password, #password-repeat, #nom, #prenom, #birthday"
+    ).removeClass("error");
+    $(".message_error").remove();
 
     let formValidation = true;
-    const email = $('#email').val();
-    const password1 = $('#password').val();
-    const password2 = $('#password-repeat').val();
-    const nom = $('#nom').val();
-    const prenom = $('#prenom').val();
-    const birthday = $('#birthday').val();
+    const email = $("#email").val();
+    const password1 = $("#password").val();
+    const password2 = $("#password-repeat").val();
+    const nom = $("#nom").val();
+    const prenom = $("#prenom").val();
+    const birthday = $("#birthday").val();
 
     // email
-    if (email === '') {
-      message_error('#email', "L'email ne doit pas être vide");
+    if (email === "") {
+      message_error("#email", "L'email ne doit pas être vide");
       formValidation = false;
     } else if (!ValidateEmail(email)) {
-      message_error('#email', 'Vous avez rentrez un email invalide !');
+      message_error("#email", "Vous avez rentrez un email invalide !");
       formValidation = false;
     }
 
     // nom
-    if (nom === '') {
-      message_error('#nom', 'Veuillez rentrer un nom');
+    if (nom === "") {
+      message_error("#nom", "Veuillez rentrer un nom");
       formValidation = false;
     } else if (nom.length > 50) {
-      message_error('#nom','Nom trop long ! > 150 caractères');
+      message_error("#nom", "Nom trop long ! > 150 caractères");
       formValidation = false;
     }
 
     // prenom
-    if (prenom === '') {
-      message_error('#prenom', 'Veuillez rentrer un prenom');
+    if (prenom === "") {
+      message_error("#prenom", "Veuillez rentrer un prenom");
       formValidation = false;
     } else if (prenom.length > 50) {
-      message_error('#prenom', 'Prénom trop long !');
+      message_error("#prenom", "Prénom trop long !");
       formValidation = false;
     }
 
     // Birthday
     if (!isValidDate(birthday)) {
-      message_error('#birthday', 'Erreur de format de la date ! ex format : 1999/02/31');
+      message_error(
+        "#birthday",
+        "Erreur de format de la date ! ex format : 1999/02/31"
+      );
       formValidation = false;
     }
 
-
- 
     // Validating password
 
-    if (password1 === '') {
-      message_error('#password', ' Le mot de passe ne doit pas être vide !');
+    if (password1 === "") {
+      message_error("#password", " Le mot de passe ne doit pas être vide !");
       formValidation = false;
-
-    } else if (verifyPassword(password1)){
-
+    } else if (verifyPassword(password1)) {
       if (password1 !== password2) {
-
-        message_error('#password',' Les mots de passe sont différents !');
+        message_error("#password", " Les mots de passe sont différents !");
         formValidation = false;
-  
-    }
-  } else {
-
-    message_error('#password', ' Le mot de passe doit avoir au moins 8 caractères, une majuscule et un nombre !');
-        formValidation = false;
-
-    } 
-
-
-      //Verifying password confirmation
-
-   if (password2 === '') {
-        message_error('#password-repeat', ' Le mot de passe de confirmation ne doit pas être vide !');
-        formValidation = false;
-
-  } else if (password2 !== password1) {
-
-        message_error('#password-repeat', ' Les mots de passe ne sont pas les mêmes !');
-        formValidation = false;
-
+      }
+    } else {
+      message_error(
+        "#password",
+        " Le mot de passe doit avoir au moins 8 caractères, une majuscule et un nombre !"
+      );
+      formValidation = false;
     }
 
+    //Verifying password confirmation
 
+    if (password2 === "") {
+      message_error(
+        "#password-repeat",
+        " Le mot de passe de confirmation ne doit pas être vide !"
+      );
+      formValidation = false;
+    } else if (password2 !== password1) {
+      message_error(
+        "#password-repeat",
+        " Les mots de passe ne sont pas les mêmes !"
+      );
+      formValidation = false;
+    }
 
     if (!formValidation) {
       return;
@@ -119,39 +119,47 @@ $(document).ready(function () {
 
     let url = window.location.host + window.location.pathname;
     url = url.replace(/\/+/g, "/");
-    url = window.location.protocol + '//' + url;
-    const urlBase = url.substring(0, url.indexOf('inscription.html'));
+    url = window.location.protocol + "//" + url;
+    const urlBase = url.substring(0, url.indexOf("inscription.html"));
 
     let form_data = $(this).serializeArray();
     form_data.push({ name: "sign_up", value: "createUser" });
 
     // ajax
     $.ajax({
-      url: urlBase + 'app/index.php',
-      method: 'POST',
+      url: urlBase + "app/index.php",
+      method: "POST",
       data: form_data,
-      dataType: 'json',
+      dataType: "json",
       success: function (response) {
         console.log(response);
         if (response.success) {
-          $('#email , #password, #password-repeat, #nom, #prenom, #birthday').addClass('success');
+          $(
+            "#email , #password, #password-repeat, #nom, #prenom, #birthday"
+          ).addClass("success");
           // redirection
-          window.location.replace(urlBase + 'app/index.php?home=true&from=0');
+          window.location.replace(urlBase + "app/index.php?home=true&from=0");
         } else {
-          console.log('error params');
-          if (response.reason === 'email') {
-            message_error('#' + response.reason, response.message);
+          console.log("error params");
+          if (response.reason === "email") {
+            message_error("#" + response.reason, response.message);
           } else {
             console.log(response.message);
-            $('#' + response.reason).addClass('error');
-            $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' + response.message + '</div>');
+            $("#" + response.reason).addClass("error");
+            $("#submit").before(
+              '<div class="message_error"><i class="fa fa-exclamation-triangle"></i> ' +
+                response.message +
+                "</div>"
+            );
           }
         }
       },
       error: function () {
-        console.log('error');
-        $('#submit').before('<div class="message_error"><i class="fa fa-exclamation-triangle"></i> Erreur envoi de données</div>');
-      }
+        console.log("error");
+        $("#submit").before(
+          '<div class="message_error"><i class="fa fa-exclamation-triangle"></i> Erreur envoi de données</div>'
+        );
+      },
     });
   });
 });
