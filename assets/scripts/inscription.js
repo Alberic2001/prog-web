@@ -1,5 +1,32 @@
 /* eslint-env jquery */
+
+    //Testing password validity
+
+    const rules = [
+      // At least 8 characters
+      password => password.length >= 8,
+      // At least a thicc boie letter
+      password => /[A-Z]/.test(password),
+      // At least a smol letter
+      password => /[a-z]/.test(password),
+      // At least a number
+      password => /[0-9]/.test(password),
+      /*
+      // No spaces!
+      password => !/\s/.test(password),
+      */
+  ];
+  function verifyPassword(password) {
+      for (const rule of rules) {
+          if (rule(password) === false) {
+              return false;
+          }
+      }
+      return true;
+  }
+
 $(document).ready(function () {
+
   // validate form
   $('#form_inscription').submit(function (event) {
     event.preventDefault();
@@ -47,37 +74,44 @@ $(document).ready(function () {
       formValidation = false;
     }
 
+
+ 
+    // Validating password
+
     if (password1 === '') {
-      message_error('#password', 'Le mot de passe ne doit pas être vide !');
+      message_error('#password', ' Le mot de passe ne doit pas être vide !');
       formValidation = false;
-    } else if (password1.length < 6) {
+
+    } else if (verifyPassword(password1)){
+
       if (password1 !== password2) {
-        message_error('#password', 'Mot de passe trop faible ! Taille minimum 6 caractères + Les mots de passe ne sont pas les mêmes !');
+
+        message_error('#password',' Les mots de passe sont différents !');
         formValidation = false;
-      } else {
-        message_error('#password', 'Mot de passe trop faible ! Taille minimum 6 caractères');
+  
+    }
+  } else {
+
+    message_error('#password', ' Le mot de passe doit avoir au moins 8 caractères, une majuscule et un nombre !');
         formValidation = false;
-      }
-    } else if (password1 !== password2) {
-      message_error('#password', 'Les mots de passe ne sont pas les mêmes !');
-      formValidation = false;
+
+    } 
+
+
+      //Verifying password confirmation
+
+   if (password2 === '') {
+        message_error('#password-repeat', ' Le mot de passe de confirmation ne doit pas être vide !');
+        formValidation = false;
+
+  } else if (password2 !== password1) {
+
+        message_error('#password-repeat', ' Les mots de passe ne sont pas les mêmes !');
+        formValidation = false;
+
     }
 
-    if (password2 === '') {
-      message_error('#password-repeat', 'Le mot de passe de confirmation ne doit pas être vide !');
-      formValidation = false;
-    } else if (password2.length < 6) {
-      if (password1 !== password2) {
-        message_error('#password-repeat', 'Mot de passe trop faible ! Taille minimum 6 caractères + Les mots de passe ne sont pas les mêmes !');
-        formValidation = false;
-      } else {
-        message_error('#password-repeat', 'Mot de passe trop faible ! Taille minimum 6 caractères');
-        formValidation = false;
-      }
-    } else if (password1 !== password2) {
-      message_error('#password-repeat', 'Les mots de passe ne sont pas les mêmes !');
-      formValidation = false;
-    }
+
 
     if (!formValidation) {
       return;
